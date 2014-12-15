@@ -12,14 +12,12 @@
         <title>Login Page</title>        
     </head>
     <body>
-        <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+
+                
+                    <div class="h1" style="border: none;">
                         <h1 class="text-center">Đăng nhập</h1>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form col-md-12 center-block" action="Controller" method="post">
+                    </div>                   
+                        <form class="form col-md-12 center-block " action="Controller" method="post" style="width: 50%;float: none;">
                         <div class="form-group">
                             <input type="text" class="form-control input-lg" placeholder="Username" name="username">
                             
@@ -29,25 +27,41 @@
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-lg btn-block" name="btnAction" value="Login">Đăng nhập</button>
-                            <span class="pull-right"><a href="register.jsp">Đăng ký</a></span>
                         </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">	                        
-                        <div class="col-md-12">
-                            <a href="index.jsp">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Trở về</button>
-                            </a>
+                            
+                        
                             <%
                                 String error = request.getParameter("error");
-                                if (error != null ) {                                            
-                                    out.print("<p>username or password invalid!</p>");
+                                if (error != null ) {
+                            %>
+                            <script type="text/javascript">
+    $(window).load(function(){
+        $('#loginModal').modal('show');
+    });
+</script>
+                            <div class="modal fade bs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-sm">
+                                <div class="modal-content" style="margin-top: 150px;width: 120%;">                               
+                                    <h4>Tên đăng nhập hoặc mật khẩu không đúng!</h4>
+                                </div>
+                              </div>
+                            </div>
+                            <%
                                 }                              
                             %>
-                        </div>	
-                    </div>
-                </div>
-            </div>
-        </div>
+                        
+
+                      </form>
+                    <div class="col-md-12" style="width: 50%;padding-left: 371px;">
+                            <a href="index.jsp">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Trở về</button>
+                            </a> 
+                        </div>
+                                       <div class="col-md-12" style="float: left;width: 50%;padding-left: 231px;">
+                            <a href="register.jsp">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Đăng ký</button>
+                            </a>
+                        </div>
+         
     </body>
 </html>

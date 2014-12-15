@@ -11,9 +11,8 @@
 <link rel="stylesheet" type="text/css" href="Styles/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="Styles/styles.css">
 <link rel="stylesheet" type="text/css" href="Styles/datepicker.css">
-<link rel="stylesheet" type="text/css" href="Scripts/bootstrap-datepicker.js">
 <script src="http://getbootstrap.com/assets/js/ie-emulation-modes-warning.js"></script>
 <script src="Scripts/docs.min.js"></script>
 <script src="Scripts/jquery.min.js"></script>
 <script src="Scripts/bootstrap.min.js"></script>
-
+<script src="Scripts/bootstrap-datepicker.js"></script>

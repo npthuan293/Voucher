@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Đang ký</title>
         <jsp:include page="head.jsp" />
         <style> 
             body{
@@ -15,11 +16,10 @@
 
             }
         </style>
-        <script src="Scripts/bootstrap-datepicker.js">
-        </script >
-           <script>
-              $('#date').datepicker();
-
+        <script type="text/javascript">
+			$(document).ready(function () {
+				$('#date').datepicker();
+			});
         </script>
     </head>
     <body>
@@ -33,7 +33,7 @@
         <!-- Registration form - START -->
         <div class="container">
             <div class="row">
-                <form action="Controller" role="form" method="post">
+                <form action="Controller" role="form" >
                     <div class="col-lg-6">
                         <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Thông tin bắt buộc</strong></div>
                         <div class="form-group">
@@ -82,19 +82,21 @@
                             <label for="InputSex">Giới tính</label>
                             <div class="input-group">
                                 <select id="elm_42" class="form-control" name="InputSex" style="border-radius: 4px;">
-
                                     <option >Nam</option>
                                     <option >Nữ</option>
                                 </select>                        
                             </div>
                         </div>    
-                        <div class="form-group">
-                            <label for="InputDate">Ngày sinh</label>
-                            <div class="input-group">
-                                <input type="date" name="date" value="" id="date" class="form-control" required/>
-                                <span class="input-group-addon" style="width: 0;"><span class="glyphicon glyphicon-asterisk"></span></span>
+                        <div class="form-group" style="width: 35%;">
+                            <label for="InputDate" >Ngày sinh</label>
+                            <div class='input-group date' >
+                                <input type="text" id="date" name="date" class="form-control" data-date-format="yyyy/mm/dd" required/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar">                                        
+                                    </span>                                        
+                                </span>
                             </div>
-                        </div>                  
+                        </div>  
                         <div class="form-group">
                             <label for="InputAddress">Địa chỉ</label>
                             <div class="input-group">

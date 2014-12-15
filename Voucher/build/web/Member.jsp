@@ -4,6 +4,7 @@
     Author     : PhuThuan
 --%>
 
+<%@page import="voucherShop.Member"%>
 <%@page import="voucherShop.Account"%>
 <%@page import="voucherShop.Event"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -62,8 +63,9 @@
                             </thead>
                             <tbody>
                                 <%
-                                    Account a = new Account();                
-                                    Object[][] result = a.LoadMemberAccount();                         
+                                    Member m = new Member();
+                                    Account a = new Account();
+                                    Object[][] result = m.LoadMemberAccount();                         
                                     for (int i = 0; i < result.length; i++) {
                                         Object[][] result2 = a.LoadAccountByUsername((String)result[i][1]);
                                         out.print("<tr>");

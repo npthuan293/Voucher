@@ -165,7 +165,7 @@ public Object[][] loadData(String sql, Object[] value, int nParameter) {
         return null;
     }
     public Date toDate(String date) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
         java.util.Date temp1 = df.parse(date);
         java.sql.Date sql = new java.sql.Date(temp1.getTime());
         return sql;

@@ -48,14 +48,14 @@ public class Event {
         }
         return false;
     }
-    public boolean insertMember(String ma_mem,String username,String pass, String hoten, String diachi, String sdt,String email,String ngaysinh,String CMND,String ngaydk, String gioitinh) {
+    public boolean insertMember(String username,String pass, String hoten, String diachi, String sdt,String email,String ngaysinh,String CMND,String ngaydk, String gioitinh) {
         try {
             Account a = new Account();
             Member m = new Member();
             if (!a.CheckAccount(username)) {
                 //pass = md5String(pass);
-                a.InsertAccount(username, pass);
-                m.InsertMember(ma_mem, username, hoten, diachi, sdt, email, ngaysinh, CMND, ngaydk, gioitinh);
+                a.InsertAccountMember(username, pass);
+                m.InsertMember(username, hoten, diachi, sdt, email, ngaysinh, CMND, ngaydk, gioitinh);
                 return true;
             } else {
                 return false;
@@ -70,7 +70,7 @@ public class Event {
             Account a = new Account();
             Member m = new Member();
             if (!a.CheckAccount(username)) {
-                a.InsertAccount(username, pass);                
+                a.InsertAccountMember(username, pass);                
                 return true;
             } else {
                 return false;
@@ -80,12 +80,14 @@ public class Event {
         }
         return false;
     }    
-    public boolean updateAccount(String name,String username, String pass, String email, String sex,String date,String address) {
+    public boolean updateMember(String hoten,String username, String pass, String email, String gioitinh, String ngaysinh, String diachi, String CMND, String sdt) {
         try {
             Account a = new Account();
-            if (!a.CheckAccount(username)) {
+            Member m = new Member();
+            if (a.CheckAccount(username)) {
                 //pass = md5String(pass);
-                a.UpdateAccount(name, username, pass, email, sex, date, address);
+                a.UpdatePass(username, pass);
+                m.UpdateMember(hoten, username, email, gioitinh, ngaysinh, diachi, CMND, sdt);
                 return true;
             } else {
                 return false;

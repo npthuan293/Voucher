@@ -52,7 +52,7 @@ public class Account {
         return false;
     }
     
-    public void InsertAccount(String username,String pass){
+    public void InsertAccountMember(String username,String pass){
         cls =  new Connect();
         int nparameter = 2;
         String[] name = new String[nparameter];
@@ -61,29 +61,19 @@ public class Account {
         name[1] = "password";
         value[0] = username;
         value[1] = pass;
-        cls.excuteDataReader("InsertAccount", value, nparameter);
+        cls.excuteDataReader("InsertAccountMember", value, nparameter);
         cls.Disconnect();
     }
-    public void UpdateAccount(String nameid,String username, String pass, String email, String sex,String date,String address) {
+    public void UpdatePass(String username, String pass) {
         cls = new Connect();
-        int nparameter = 7;
+        int nparameter = 2;
         String[] name = new String[nparameter];
         Object[] value = new Object[nparameter];
         name[0] = "username";
         name[1] = "pass";
-        name[2] = "hoten";
-        name[3] = "email";
-        name[4] = "gioitinh";
-        name[5] = "ngaysinh";
-        name[6] = "diachi";
         value[0] = username;
         value[1] = pass;
-        value[2] = nameid;
-        value[3] = email;
-        value[4] = sex;
-        value[5] = date;
-        value[6] = address;
-        cls.executeQuery("UpdateAccount", value, nparameter);
+        cls.executeQuery("UpdatePass", value, nparameter);
         cls.Disconnect();
     }
     public void UpdateKey(String username, boolean lock) {
@@ -143,28 +133,7 @@ public class Account {
         cls.Disconnect();
         return result;
     }    
-    public Object[][] LoadMemberAccount() {
-        cls = new Connect();
-        Object[][] result = cls.loadData("LoadMemberAccount");
-        cls.Disconnect();
-        return result;
-    }  
-    public Object[][] LoadStaffAccount() {
-        cls = new Connect();
-        Object[][] result = cls.loadData("LoadStaffAccount");
-        cls.Disconnect();
-        return result;
-    }
-    public void DeleteStaff(String username) {
-        cls = new Connect();
-        int nparameter = 1;
-        String[] name = new String[nparameter];
-        Object[] value = new Object[nparameter];
-        name[0] = "username";
-        value[0] = username;
-        cls.executeQuery("DeleteStaff", value, nparameter);
-        cls.Disconnect();
-    }
+
     public void DeleteAccount(String username) {
         cls = new Connect();
         int nparameter = 1;

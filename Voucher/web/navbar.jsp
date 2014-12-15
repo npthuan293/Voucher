@@ -49,7 +49,9 @@
                                 <li><a href="#">One more separated link</a></li>
                             </ul>
                         </li>
-                        <div class="col-sm-3 col-md-3" style="width: 35%;">
+                          
+                    </ul>
+                                            <div class="col-sm-3 col-md-3">
                             <form class="navbar-form" role="search">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search" name="q">
@@ -58,8 +60,7 @@
                                     </div>
                                 </div>
                             </form>
-                        </div>                          
-                    </ul>
+                        </div>
                     <ul class="nav navbar-nav navbar-right">
                         <%
                             //String name = request.getParameter("name");

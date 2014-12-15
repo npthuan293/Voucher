@@ -66,23 +66,20 @@ public class Controller extends HttpServlet {
                 case "Đăng ký": {
                     Connect cls = new Connect();
                     Event e = new Event();
-                    Account a = new Account();
-                    Date today=new Date(System.currentTimeMillis());
+//                    Account a = new Account();
+                    Date today = new Date(System.currentTimeMillis());
                     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd");
-                    String ngaydk = timeFormat.format(today.getTime());
-                    String ma_mem = cls.GetID("M",4,"GetID_MEMBER");
+                    String ngaydk = timeFormat.format(today);                    
                     String hoten = request.getParameter("InputName");
                     String username = request.getParameter("InputUsername");
                     String pass = request.getParameter("InputPass");
                     String email = request.getParameter("InputEmail");
                     String gioitinh = request.getParameter("InputSex");
-                    Date ns = new Date(request.getParameter("date"));
-                    String ngaysinh = timeFormat.format(ns.getTime());//request.getParameter("date"); 
-                    
+                    String ngaysinh = request.getParameter("date");
                     String diachi = request.getParameter("InputAddress");
                     String CMND = request.getParameter("InputCMND");
-                    String sdt = request.getParameter("InputSDT");                    
-                    boolean result = e.insertMember(ma_mem, username, pass, hoten, diachi, sdt, email, ngaysinh, CMND, ngaydk, gioitinh);
+                    String sdt = request.getParameter("InputSDT");   
+                    boolean result = e.insertMember(username, pass, hoten, diachi, sdt, email, ngaysinh, CMND, ngaydk, gioitinh);
                     if (result) {
                             response.sendRedirect("register.jsp?success=true");   
                     } else {
@@ -96,24 +93,22 @@ public class Controller extends HttpServlet {
                     break;                    
                 }
                 case "Cập nhật":{
-                    Event e = new Event();
-                    String name = request.getParameter("InputName");
+                    Event e = new Event();                    
+                    String hoten = request.getParameter("InputName");
                     String username = request.getParameter("InputUsername");
                     String pass = request.getParameter("InputPass");
-                    String mail = request.getParameter("InputEmail");
-                    String sex = request.getParameter("InputSex");
-                    String date = request.getParameter("date");
-                    String address = request.getParameter("InputAddress");
-                    out.println("Hau");
-//                    boolean result = e.updateAccount(name, username, pass, mail, sex, date, address);
-//                    if (result) {
-//                        response.sendRedirect("info_user.jsp?success=true"); 
-//                    } else {
-//                        response.sendRedirect("info_user.jsp?success=false"); 
-//                    }  
-//                    Account a = new Account();
-//                    a.UpdateAccount(name, username, pass, mail, sex, date, address);
-//                    response.sendRedirect("info_user.jsp?success=true");
+                    String email = request.getParameter("InputEmail");
+                    String gioitinh = request.getParameter("InputSex");
+                    String ngaysinh = request.getParameter("date");
+                    String diachi = request.getParameter("InputAddress");
+                    String CMND = request.getParameter("InputCMND");
+                    String sdt = request.getParameter("InputSDT");
+                    boolean result = e.updateMember(hoten, username, pass, email, gioitinh, ngaysinh, diachi, CMND, sdt);
+                    if (result) {
+                        response.sendRedirect("info_user.jsp?success=true"); 
+                    } else {
+                        response.sendRedirect("info_user.jsp?success=false"); 
+                    }
                     break;
                 }
                 case "Lock":{
@@ -153,15 +148,21 @@ public class Controller extends HttpServlet {
                 }
                 case "DeleteStaff": {
                     Account a = new Account();
+                    Staff s = new Staff();
                     String[] username = request.getParameterValues("Select");
                     if (username.length > 0){
                         for (int i = 0;i < username.length;i++)
                         {
-                            a.DeleteStaff(username[i]);
+                            s.DeleteStaff(username[i]);
                             a.DeleteAccount(username[i]);
                         }
                     }
                     response.sendRedirect("Staff.jsp");
+                    break;
+                }
+                case "img":{
+                    String a = request.getParameter("exampleInputFile");
+                    out.println(a);
                     break;
                 }
             }
