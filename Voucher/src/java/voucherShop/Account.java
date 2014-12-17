@@ -64,6 +64,18 @@ public class Account {
         cls.excuteDataReader("InsertAccountMember", value, nparameter);
         cls.Disconnect();
     }
+    public void InsertAccountStaff(String username,String pass){
+        cls =  new Connect();
+        int nparameter = 2;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];     
+        name[0] = "username";
+        name[1] = "password";
+        value[0] = username;
+        value[1] = pass;
+        cls.excuteDataReader("InsertAccountStaff", value, nparameter);
+        cls.Disconnect();
+    }    
     public void UpdatePass(String username, String pass) {
         cls = new Connect();
         int nparameter = 2;

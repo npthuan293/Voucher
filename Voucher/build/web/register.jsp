@@ -4,11 +4,12 @@
     Author     : PhuThuan
 --%>
 
+<%@page import="voucherShop.Event"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Đang ký</title>
+        <title>Đăng ký</title>
         <jsp:include page="head.jsp" />
         <style> 
             body{
@@ -20,16 +21,36 @@
 			$(document).ready(function () {
 				$('#date').datepicker();
 			});
+                        			$(document).ready(function () {
+				$('#date2').datepicker();
+			});
         </script>
     </head>
-    <body>
+    <body>         
         <jsp:include page="navbar.jsp" />
         <div class="container">
-
-        <div class="page-header">
-            <h1>Đăng ký thành viên</h1>
-        </div>
-
+        <%
+            String username = (String) session.getAttribute("Username");
+            Event e = new Event();
+            if (username != null) {               
+                String result = e.CheckAdmin(username);
+                if (result.equals("Admin")) {
+        %>
+                    <div class="page-header">
+                        <h1>Thêm nhân viên</h1>
+                    </div>
+        <%
+                }
+            }
+            else{
+        %>
+                <div class="page-header">
+                    <h1>Đăng ký thành viên</h1>
+                </div>  
+        <%
+                }
+        %>
+        
         <!-- Registration form - START -->
         <div class="container">
             <div class="row">
@@ -90,12 +111,30 @@
                         <div class="form-group" style="width: 35%;">
                             <label for="InputDate" >Ngày sinh</label>
                             <div class='input-group date' >
-                                <input type="text" id="date" name="date" class="form-control" data-date-format="yyyy/mm/dd" required/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar">                                        
-                                    </span>                                        
-                                </span>
-                            </div>
+                                 <input type="text" id="date" name="date" class="form-control" data-date-format="yyyy/mm/dd" required/>
+                                 <span class="input-group-addon">
+                                     <span class="glyphicon glyphicon-calendar">                                        
+                                     </span>                                        
+                                 </span>
+                            </div> 
+                            <%
+                                
+                                if (username != null){
+                                    String result = e.CheckAdmin(username);
+                                    if (result.equals("Admin")){
+                            %>    
+                                        <label for="InputDateJob" >Ngày vào làm</label>
+                                        <div class='input-group date' >
+                                            <input type="text" id="date2" name="datejob" class="form-control" data-date-format="yyyy/mm/dd" required/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar">                                        
+                                                </span>                                        
+                                            </span>
+                                        </div>
+                            <%
+                                    }
+                                }                               
+                            %>
                         </div>  
                         <div class="form-group">
                             <label for="InputAddress">Địa chỉ</label>
@@ -104,7 +143,18 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
-                        <input type="submit" name="btnAction" id="submit" value="Đăng ký" class="btn btn-info pull-right">
+                        <%
+                                if (username != null){
+                                    String result = e.CheckAdmin(username);
+                                    if (result.equals("Admin")){
+                        %>
+                                        <input type="submit" name="btnAction" id="submit" value="Tạo tài khoản" class="btn btn-info pull-right">
+                                        <%
+                                        }                              
+                                }else{
+                        %>
+                                <input type="submit" name="btnAction" id="submit" value="Đăng ký" class="btn btn-info pull-right">
+                        <%}%>
                     </div>
                 </form>
                 <div class='col-lg-5 col-md-push-1'>
@@ -112,24 +162,19 @@
                 <%
                     String success = request.getParameter("success");
                     if (success !=null){
-                    if (success.equals("true"))
-                    {
-                        //out.println("");
-                        //out.println("");
-                        out.println("<div class='alert alert-success'>");
-                        out.println("<strong><span class='glyphicon glyphicon-ok'></span>Bạn đã đăng kí thành công</strong>");        
-                        out.println("</div>");                   
-                        //out.println("</div>"); 
-                        //out.println("</div>"); 
-                    }else{
-                        //out.println("<div class='col-lg-5 col-md-push-1'>");
-                        //out.println("<div class='col-md-12'>");                
-                        out.println("<div class='alert alert-danger'>");         
-                        out.println("<strong><span class='glyphicon glyphicon-remove'></span><strong>Lỗi!Bạn hãy kiểm tra lại thông tin.</strong>");          
-                        out.println("</div>"); 
-                        //out.println("</div>"); 
-                        //out.println("</div>");                 
-                    }
+                        if (success.equals("true")){
+                %>                           
+                        <div class='alert alert-success'>
+                            <strong><span class='glyphicon glyphicon-ok'></span>Bạn đã đăng kí thành công</strong>      
+                        </div>   
+                <%
+                        }else{    
+                 %>
+                        <div class='alert alert-danger'>        
+                            <strong><span class='glyphicon glyphicon-remove'></span><strong>Lỗi!Bạn hãy kiểm tra lại thông tin.</strong>       
+                        </div> 
+                <%
+                        }
                     }
                 %>
                     </div>
@@ -137,8 +182,6 @@
             </div>
         </div>
         <!-- Registration form - END -->
-
         </div>
-
     </body>
 </html>

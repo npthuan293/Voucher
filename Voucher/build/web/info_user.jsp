@@ -36,9 +36,9 @@
         %>
         <div class="container">
 
-        <div class="page-header">
-            <h1>Thông tin cá nhân</h1>
-        </div>
+            <div class="page-header">
+                <h1>Thông tin cá nhân</h1>
+            </div>
 
         <!-- Registration form - START -->
         <div class="container">
@@ -94,13 +94,17 @@
                                 <select id="elm_42" class="form-control" name="InputSex" style="border-radius: 4px;" required>
                                     <%
                                         String sex =(String) result1[0][10];
-                                        if (sex.equals("Nam"))
+                                        if (sex.equals("Nam"))                                    
                                         {
-                                         out.println("<option selected='selected'>Nam</option>");
-                                         out.println("<option >Nữ</option>");
+                                    %>        
+                                        <option selected='selected'>Nam</option>
+                                        <option>Nữ</option>
+                                    <%
                                         }else{
-                                         out.println("<option >Nam</option>");
-                                         out.println("<option selected='selected'>Nữ</option>");                                
+                                    %>
+                                        <option >Nam</option>
+                                        <option selected='selected'>Nữ</option>
+                                    <%
                                         }
                                     %>
                                 </select>                        
@@ -130,26 +134,25 @@
                     <div class='col-md-12'>
                 <%
                     String success = request.getParameter("success");
-
                     if (success !=null){
                         if (success.equals("true"))
                         {
-                        //out.println("");
-                        //out.println("");
-                            out.println("<div class='alert alert-success'>");
-                            out.println("<strong><span class='glyphicon glyphicon-ok'></span> Success! Message sent.</strong>");        
-                            out.println("</div>");                   
-                        //out.println("</div>"); 
-                        //out.println("</div>"); 
+                %>
+                        <div class='alert alert-success'>
+                            <strong><span class='glyphicon glyphicon-ok'></span>Đăng ký thành công !!!</strong>      
+                        </div>                  
+                    </div>
+                 </div>
+                <%
                         }else{
-                        //out.println("<div class='col-lg-5 col-md-push-1'>");
-                        //out.println("<div class='col-md-12'>");                
-                            out.println("<div class='alert alert-danger'>");         
-                            out.println("<strong><span class='glyphicon glyphicon-remove'></span><strong> Error! Please check all page inputs.</strong>");          
-                            out.println("</div>");
-                        //out.println("</div>"); 
-                        //out.println("</div>");                 
-                    }
+                %>             
+                        <div class='alert alert-danger'>       
+                            <strong><span class='glyphicon glyphicon-remove'></span><strong>Lỗi.Kiểm tra lại thông tin đăng ký.</strong>    
+                        </div>  
+                    </div>
+                     </div>
+                        <%
+                        }
                     }
                 %>
                     </div>

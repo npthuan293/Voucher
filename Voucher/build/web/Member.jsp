@@ -19,7 +19,25 @@
                 padding:80px;
 
             }
-        </style>        
+            .table>thead>tr>th{
+             vertical-align: top;   
+            }
+        </style> 
+        <script>
+            $(document).ready(function() {
+                $('#selectall').click(function(event) {  //on click 
+                    if(this.checked) { // check select status
+                        $('.checkbox1').each(function() { //loop through each checkbox
+                            this.checked = true;  //select all checkboxes with class "checkbox1"               
+                        });
+                    }else{
+                        $('.checkbox1').each(function() { //loop through each checkbox
+                            this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+                        });         
+                    }
+                });   
+            });          
+        </script>        
         <title>Quản lý thành viên</title>
     </head>
     <body>
@@ -47,7 +65,7 @@
                         <table class="table table-bordered table-hover table-striped tablesorter" id="usertable">
                             <thead>
                                 <tr>
-                                    <th>Check <i class="fa fa-sort"></i></th>
+                                    <td><b>Check</b><br><input type="checkbox" id="selectall" value=""/></td>                                   
                                     <th>Tên đăng nhập <i class="fa fa-sort"></i></th>
                                     <th>Họ tên <i class="fa fa-sort"></i></th>
                                     <th>Ngày sinh <i class="fa fa-sort"></i></th>
@@ -68,31 +86,34 @@
                                     Object[][] result = m.LoadMemberAccount();                         
                                     for (int i = 0; i < result.length; i++) {
                                         Object[][] result2 = a.LoadAccountByUsername((String)result[i][1]);
-                                        out.print("<tr>");
-                                        out.print("<td><input type='checkbox' name='Select' id='Select' value='" + result[i][1] + "'></td>");
-                                        out.print("<td><a href='Edituser.jsp?username=" + result[i][1] + "'>" + result[i][1] + "</a></td>");
-
-                                        if (result[i][2] == null) {
-                                            out.print("<td></td>");
-                                        } else {
-                                            out.print("<td>" + result[i][2] + "</td>");
-                                        }
-                                        out.print("<td>" + result[i][6] + "</td>");
-                                        out.print("<td>" + result[i][5] + "</td>");
-                                        out.print("<td>" + result[i][4] + "</td>");
-                                        out.print("<td>" + result[i][10] + "</td>");
-                                        out.print("<td>" + result[i][3] + "</td>");
-                                        out.print("<td>" + result2[0][1] + "</td>");
-                                        out.print("<td>" + result[i][8] + "</td>");
-                                        out.print("<td>" + result[i][9] + "</td>");
-                                        if (result2[0][2].equals("On")){
-                                            out.print("<td>Còn hoạt động</td>");
-                                        }else{
-                                            out.print("<td>Đã khóa</td>");
-                                        }
-                                        out.print("</tr>");
+                                %>
+                                <tr>
+                                    <td><input type='checkbox' name='Select' id='Select' class="checkbox1" value=<%=result[i][1]%> ></td>
+                                    <td><a href='Edituser.jsp?username=<%=result[i][1]%>' ><%=result[i][1]%></a></td>
+                                    <td><%=result[i][2]%></td>
+                                    <td><%=result[i][6]%></td>
+                                    <td><%=result[i][5]%></td>
+                                    <td><%=result[i][4]%></td>
+                                    <td><%=result[i][10]%></td>
+                                    <td><%=result[i][3]%></td>
+                                    <td><%=result2[0][1]%></td>
+                                    <td><%=result[i][8]%></td>
+                                    <td><%=result[i][9]%></td>
+                                <%
+                                    if (result2[0][2].equals("On")){
+                                %>
+                                    <td>Còn hoạt động</td>
+                                <%
+                                    }else{
+                                %>
+                                    <td>Đã khóa</td>
+                                <%
                                     }
                                 %>
+                                    </tr>
+                            <%
+                                }
+                             %>
                             </tbody>
                         </table>
                     </div>

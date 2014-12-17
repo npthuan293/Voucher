@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -56,17 +57,19 @@ public class Controller extends HttpServlet {
                     if (result) {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("Username", username);
-                        response.sendRedirect("index.jsp");        
+                        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                        rd.forward(request, response);        
                           
                     } else {
-                        response.sendRedirect("login.jsp?error=true"); 
+                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp?error=true");
+                        rd.forward(request, response);  
                     }
                     break;          
                 }
                 case "Đăng ký": {
                     Connect cls = new Connect();
                     Event e = new Event();
-//                    Account a = new Account();
+//                  Account a = new Account();
                     Date today = new Date(System.currentTimeMillis());
                     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd");
                     String ngaydk = timeFormat.format(today);                    
@@ -105,9 +108,11 @@ public class Controller extends HttpServlet {
                     String sdt = request.getParameter("InputSDT");
                     boolean result = e.updateMember(hoten, username, pass, email, gioitinh, ngaysinh, diachi, CMND, sdt);
                     if (result) {
-                        response.sendRedirect("info_user.jsp?success=true"); 
+                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=true");
+                        rd.forward(request, response);  
                     } else {
-                        response.sendRedirect("info_user.jsp?success=false"); 
+                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=false");
+                        rd.forward(request, response);                          
                     }
                     break;
                 }
@@ -141,9 +146,8 @@ public class Controller extends HttpServlet {
                     response.sendRedirect("Member.jsp");
                     break;
                 }
-                case "EditStaff": {
-                    String username = request.getParameter("Username");
-                    Event e =new Event();
+                case "AddStaff": {
+                    response.sendRedirect("register.jsp");   
                     break;
                 }
                 case "DeleteStaff": {
@@ -158,6 +162,30 @@ public class Controller extends HttpServlet {
                         }
                     }
                     response.sendRedirect("Staff.jsp");
+                    break;
+                }
+                case "Tạo tài khoản":{ //thêm mới nhân viên
+                    Event e = new Event();
+                    String hoten = request.getParameter("InputName");
+                    String username = request.getParameter("InputUsername");
+                    String pass = request.getParameter("InputPass");
+                    String email = request.getParameter("InputEmail");
+                    String gioitinh = request.getParameter("InputSex");
+                    String ngaysinh = request.getParameter("date");
+                    String diachi = request.getParameter("InputAddress");
+                    String CMND = request.getParameter("InputCMND");
+                    String sdt = request.getParameter("InputSDT");
+                    String ngayvaolam =  request.getParameter("datejob");
+                    boolean result = e.insertStaff(username, hoten, diachi, sdt, email, ngaysinh, CMND, ngaysinh, gioitinh, ngayvaolam, pass);
+                    if (result)
+                    {
+                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=true");
+                        rd.forward(request, response);
+                    }else
+                    {
+                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=false");
+                        rd.forward(request, response); 
+                    }
                     break;
                 }
                 case "img":{

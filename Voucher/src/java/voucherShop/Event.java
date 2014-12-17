@@ -65,6 +65,24 @@ public class Event {
         }
         return false;
     }
+    public boolean insertStaff(String username, String hoten, String diachi, String sdt,String email,String ngaysinh,String CMND,String ngaydk,String gioitinh,String ngayvaolam, String pass) {
+        try {
+            Account a = new Account();
+            Staff s = new Staff();
+            if (!a.CheckAccount(username)) {
+                //pass = md5String(pass);
+                a.InsertAccountStaff(username, pass);
+                s.InsertStaff(username, hoten, diachi, sdt, email, ngaysinh, CMND, ngaydk, gioitinh, ngayvaolam);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+
+        }
+        return false;
+    }    
+    
     public boolean insertAccount(String username,String pass) {
         try {
             Account a = new Account();

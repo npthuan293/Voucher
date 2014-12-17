@@ -18,11 +18,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Voucher</a>
+                    <a class="navbar-brand" href="index.jsp">Voucher</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Trang chủ</a></li>
+                        <li class="active"><a href="index.jsp">Trang chủ</a></li>
                         <li><a href="#about">Giới thiệu</a></li>
                         <li><a href="#contact">Liên hệ</a></li>
                         <li class="dropdown">
