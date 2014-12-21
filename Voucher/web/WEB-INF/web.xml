@@ -4,9 +4,25 @@
         <servlet-name>Controller</servlet-name>
         <servlet-class>voucherShop.Controller</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>checkReg</servlet-name>
+        <servlet-class>voucherShop.checkReg</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControllerVoucher</servlet-name>
+        <servlet-class>voucherShop.ControllerVoucher</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkReg</servlet-name>
+        <url-pattern>/checkReg</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerVoucher</servlet-name>
+        <url-pattern>/ControllerVoucher</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

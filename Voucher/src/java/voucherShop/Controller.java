@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.json.JSONObject;
 
 /**
  *
@@ -44,32 +43,35 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException, ParseException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            
             String action = request.getParameter("btnAction");
             switch (action) 
             {
                 case "Login": {
-                    String username = request.getParameter("username");
-                    String password = request.getParameter("password");
-                    
+                    Account a = new Account();
                     Event e = new Event();
-                    boolean result = e.checkLogin(username, password);
-                    
+                    String username = request.getParameter("username");
+                    String password = request.getParameter("password");                   
+                    boolean result = e.checkLogin(username, password);                    
                     if (result) {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("Username", username);
+                        Date lasttime = new Date(System.currentTimeMillis());
+                        SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                        String lastlogin = timeFormat.format(lasttime); 
+                        a.LastLogin(username,lastlogin);                        
                         RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-                        rd.forward(request, response);        
-                          
+                        rd.forward(request, response);
+                        response.sendRedirect("index.jsp");                                
                     } else {
-                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp?error=true");
-                        rd.forward(request, response);  
+                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp?error=true"); 
+                        rd.forward(request, response);
                     }
                     break;          
                 }
                 case "Đăng ký": {
                     Connect cls = new Connect();
                     Event e = new Event();
-//                  Account a = new Account();
                     Date today = new Date(System.currentTimeMillis());
                     SimpleDateFormat timeFormat = new SimpleDateFormat("yyyy/MM/dd");
                     String ngaydk = timeFormat.format(today);                    
@@ -84,7 +86,7 @@ public class Controller extends HttpServlet {
                     String sdt = request.getParameter("InputSDT");   
                     boolean result = e.insertMember(username, pass, hoten, diachi, sdt, email, ngaysinh, CMND, ngaydk, gioitinh);
                     if (result) {
-                            response.sendRedirect("register.jsp?success=true");   
+                        response.sendRedirect("register.jsp?success=true");
                     } else {
                         response.sendRedirect("register.jsp?success=false");
                     }
@@ -95,8 +97,8 @@ public class Controller extends HttpServlet {
                     response.sendRedirect("index.jsp");
                     break;                    
                 }
-                case "Cập nhật":{
-                    Event e = new Event();                    
+                case "Cập nhật" : {   
+                    Event e = new Event(); 
                     String hoten = request.getParameter("InputName");
                     String username = request.getParameter("InputUsername");
                     String pass = request.getParameter("InputPass");
@@ -108,14 +110,32 @@ public class Controller extends HttpServlet {
                     String sdt = request.getParameter("InputSDT");
                     boolean result = e.updateMember(hoten, username, pass, email, gioitinh, ngaysinh, diachi, CMND, sdt);
                     if (result) {
-                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=true");
-                        rd.forward(request, response);  
+                        response.sendRedirect("info_user.jsp?success=true");
                     } else {
-                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=false");
-                        rd.forward(request, response);                          
-                    }
-                    break;
+                        response.sendRedirect("info_user.jsp?success=false");                          
+                    }   
+                    break;  
                 }
+                case "Cập nhật thông tin" : {   
+                    Event e = new Event(); 
+                    String hoten = request.getParameter("InputName");
+                    String username = request.getParameter("InputUsername");
+                    String pass = request.getParameter("InputPass");
+                    String email = request.getParameter("InputEmail");
+                    String gioitinh = request.getParameter("InputSex");
+                    String ngaysinh = request.getParameter("date");
+                    String diachi = request.getParameter("InputAddress");
+                    String CMND = request.getParameter("InputCMND");
+                    String sdt = request.getParameter("InputSDT");
+                    String ngayvaolam = request.getParameter("datejob");
+                    boolean result = e.updateStaff(hoten, username, pass, email, gioitinh, ngaysinh, diachi, CMND, sdt, ngayvaolam);
+                    if (result) {
+                        response.sendRedirect("info_staff.jsp?success=true&Username="+username);
+                    } else {
+                        response.sendRedirect("info_staff.jsp?success=false&Username="+username);                          
+                    }   
+                    break;  
+                }                  
                 case "Lock":{
                     Account a = new Account();
                     String[] username = new String[]{};
@@ -179,19 +199,38 @@ public class Controller extends HttpServlet {
                     boolean result = e.insertStaff(username, hoten, diachi, sdt, email, ngaysinh, CMND, ngaysinh, gioitinh, ngayvaolam, pass);
                     if (result)
                     {
-                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=true");
-                        rd.forward(request, response);
+                        response.sendRedirect("register.jsp?success=true");
                     }else
                     {
-                        RequestDispatcher rd = request.getRequestDispatcher("register.jsp?success=false");
-                        rd.forward(request, response); 
+                        response.sendRedirect("register.jsp?success=false");
                     }
                     break;
                 }
-                case "img":{
-                    String a = request.getParameter("exampleInputFile");
-                    out.println(a);
-                    break;
+                case "checkReg":{
+                    Account a = new Account();
+                    Object[][] result = a.LoadAccount();
+                    String username = request.getParameter("user");
+                    String hint = "";
+                    if(username.equals("")==false){
+                        username=username.toLowerCase();
+                    }
+                    if(hint.equals("")==true){
+                        hint=(String)result[0][1];
+                    }
+                    else{hint+=","+(String)result[0][1];}                    
+                    if (hint.equals("") == true){
+                        out.println("a");
+                    }else{
+                        out.println("b");
+                    }
+                    for (int i = 0; i < result.length; i++){
+                        if (username.equals((String)result[0][i]))
+                        {
+                            out.println("Đã có người sử dụng");
+                        }else{
+                            out.println("Có thể sử dụng");
+                        }
+                    }                
                 }
             }
         }

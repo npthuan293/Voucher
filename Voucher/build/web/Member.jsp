@@ -55,7 +55,7 @@
         %>        
         <jsp:include page='navbar.jsp' />
             <div class="container">
-                <form action="Controller" method="post">
+                <form action="Controller">
                     <div class="row">
                         <div class="col-md-12 ">	
                             <h3>Danh sách thành viên</h3>
@@ -89,16 +89,16 @@
                                 %>
                                 <tr>
                                     <td><input type='checkbox' name='Select' id='Select' class="checkbox1" value=<%=result[i][1]%> ></td>
-                                    <td><a href='Edituser.jsp?username=<%=result[i][1]%>' ><%=result[i][1]%></a></td>
+                                    <td><%=result[i][1]%></a></td>
                                     <td><%=result[i][2]%></td>
                                     <td><%=result[i][6]%></td>
                                     <td><%=result[i][5]%></td>
                                     <td><%=result[i][4]%></td>
-                                    <td><%=result[i][10]%></td>
+                                    <td><%=result[i][9]%></td>
                                     <td><%=result[i][3]%></td>
                                     <td><%=result2[0][1]%></td>
                                     <td><%=result[i][8]%></td>
-                                    <td><%=result[i][9]%></td>
+                                    <td><%=result2[0][4]%></td>
                                 <%
                                     if (result2[0][2].equals("On")){
                                 %>

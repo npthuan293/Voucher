@@ -59,4 +59,41 @@ public class Staff {
         cls.excuteDataReader("InsertStaff", value, nparameter);
         cls.Disconnect();   
     }
+    public void UpdateStaff(String hoten,String username, String email, String gioitinh, String ngaysinh, String diachi, String CMND, String sdt, String ngayvaolam) {
+        cls = new Connect();
+        int nparameter = 9;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "username";
+        name[1] = "hoten";
+        name[2] = "email";
+        name[3] = "gioitinh";
+        name[4] = "ngaysinh";
+        name[5] = "diachi";
+        name[6] = "cmnd";
+        name[7] = "sdt";
+        name[8] = "ngayvaolam";
+        value[0] = username;
+        value[1] = hoten;
+        value[2] = email;
+        value[3] = gioitinh;
+        value[4] = ngaysinh;
+        value[5] = diachi;
+        value[6] = CMND;
+        value[7] = sdt;
+        value[8] = ngayvaolam;
+        cls.executeQuery("UpdateStaff", value, nparameter);
+        cls.Disconnect();
+    } 
+    public Object[][] LoadStaffByUsername(String username) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "username";
+        value[0] = username;
+        Object[][] result = cls.loadData("LoadStaffByUsername", value, nparameter);
+        cls.Disconnect();
+        return result;
+    }     
 }

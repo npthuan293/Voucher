@@ -63,47 +63,53 @@
                         </div>
                     <ul class="nav navbar-nav navbar-right">
                         <%
-                            //String name = request.getParameter("name");
-                           // if (name != null) {
-                            //    out.print(name);
-                            //}
                             String username = (String) session.getAttribute("Username");
                             if (username != null) {
-                                out.print("<li class='dropdown' >");
-                                out.print("<a data-toggle='dropdown' class='dropdown-toggle' href=''>Xin chào, " + username + "<b class='caret'></b></a>");
-                                out.print("<ul role='menu' class='dropdown-menu'>");
-                                Event e = new Event();
-                                String result = e.CheckAdmin(username);
-                                if (result.equals("Admin")) {
-                                    out.print("<li><a href='info_user.jsp'>Thông tin cá nhân</a></li>");
-                                    out.print("<li><a href='Member.jsp'>Quản lý thành viên</a></li>");
-                                    out.print("<li><a href='Staff.jsp'>Quản lý nhân viên</a></li>");
-                                    out.print("<li><a href='NCC.jsp'>Quản lý nhà cung cấp</a></li>");
-                                    out.print("<li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>");
-                                }else if (result.equals("Nhân viên bán hàng")){
-                                    out.print("<li><a href='info_user.jsp'>Thông tin cá nhân</a></li>");
-                                    out.print("<li><a href=''>Quản lý Voucher</a></li>");
-                                    out.print("<li><a href=''>Quản lý Thông tin khuyến mãi</a></li>");
-                                    out.print("<li><a href=''>Quản lý đơn hàng</a></li>");
-                                    out.print("<li><a href=''>Quản lý quà tặng</a></li>");
-                                    out.print("<li><a href=''>Thống kê</a></li>");
-                                    out.print("<li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>");                                   
-                                }
-                                else{
-                                    out.print("<li><a href='info_user.jsp'>Thông tin cá nhân</a></li>");
-                                    out.print("<li><a href='Payment.jsp'>Đơn hàng</a></li>");
-                                    out.print("<li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>");
-                                    out.print("</ul>");
-                                    out.print("</li>");
+                        %>
+                            <li class='dropdown'>
+                                <a data-toggle='dropdown' class='dropdown-toggle' href=''>Xin chào, <%=username%><b class='caret'></b></a>
+                                <ul role='menu' class='dropdown-menu'>
+                            <%        
+                                    Event e = new Event();
+                                    String result = e.CheckAdmin(username);
+                                    if (result.equals("Admin")) {
+                             %>
+                                    <li><a href='info_staff.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
+                                    <li><a href='Member.jsp'>Quản lý thành viên</a></li>
+                                    <li><a href='Staff.jsp'>Quản lý nhân viên</a></li>
+                                    <li><a href='NCC.jsp'>Quản lý nhà cung cấp</a></li>
+                                    <li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>
+                            <%
+                                    }else if (result.equals("Nhân viên bán hàng")){
+                            %>
+                                    <li><a href='info_staff.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
+                                    <li><a href=''>Quản lý Voucher</a></li>
+                                    <li><a href=''>Quản lý Thông tin khuyến mãi</a></li>
+                                    <li><a href=''>Quản lý đơn hàng</a></li>
+                                    <li><a href=''>Quản lý quà tặng</a></li>
+                                    <li><a href=''>Thống kê</a></li>
+                                    <li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>                                   
+                            <%        
+                                 }
+                                    else{
+                            %>
+                                    <li><a href='info_user.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
+                                    <li><a href='Payment.jsp'>Đơn hàng</a></li>
+                                    <li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>
+                                </ul>
+                            </li>
+                        <%
                                 }
                             }else {
-                                out.print("<li>");
-                                out.print("<a href='login.jsp'>Đăng nhập</a>");
-                                out.print("</li>");
+                        %>
+                            <li>
+                                <a href='login.jsp'>Đăng nhập</a>
+                            </li>
+                        <%
                             }
                         %>
                     </ul>
-                </div>
+           </div>
             </div>
         </div>
     </div>

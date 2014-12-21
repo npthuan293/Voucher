@@ -113,7 +113,23 @@ public class Event {
         } catch (Exception ex) {
         }
         return false;
-    }  
+    }
+    public boolean updateStaff(String hoten,String username, String pass, String email, String gioitinh, String ngaysinh, String diachi, String CMND, String sdt, String ngayvaolam) {
+        try {
+            Account a = new Account();
+            Staff s = new Staff();
+            if (a.CheckAccount(username)) {
+                //pass = md5String(pass);
+                a.UpdatePass(username, pass);
+                s.UpdateStaff(hoten, username, email, gioitinh, ngaysinh, diachi, CMND, sdt, ngayvaolam);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+        }
+        return false;
+    }    
 //    public boolean updateKhoa(String username) {
 //        try {
 //            Account a = new Account();

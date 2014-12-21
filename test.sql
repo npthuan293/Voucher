@@ -8,7 +8,8 @@ create table TAIKHOAN
 	Username varchar(15) not null,
 	Password varchar(50),
 	TrangThaiTK nvarchar(30),
-	MaQuyen nvarchar(50)
+	MaQuyen nvarchar(50),
+	TGDNLanCuoi datetime,
 	primary key (username)
 )
 
@@ -19,7 +20,6 @@ create table PHANQUYEN
 	primary key (MaQuyen)
 )
 
-drop table MEMBER
 create table MEMBER
 (
 	Ma_Mem varchar(10),
@@ -31,7 +31,6 @@ create table MEMBER
 	NgaySinh_Mem date,
 	CMND varchar(20),
 	NgayDKi date,
-	TGDNLanCuoi datetime,
 	GioiTinh nvarchar(5),
 	primary key (Ma_Mem)
 )
@@ -53,24 +52,22 @@ create table NHANVIEN
 
 set dateformat dmy
 --ACCOUNT
-insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen) values ('admin','123456','On','Q001')
-insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen) values ('member','123456','On','Q003')
-insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen) values ('nvbh','123456','On','Q002')
-insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen) values ('nhkh','123456','On','Q003')
-insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen) values ('xukavo','123456','On','Q003')
+insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('admin','123456','On','Q001','20:10:01 2014/12/30')
+insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('member','123456','On','Q003','20:10:01 2014/12/30')
+insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('nvbh','123456','On','Q002','20:10:01 2014/12/30')
+insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('xukavo','123456','On','Q003','20:10:01 2014/12/30')
 
 --CHUCVU
 insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q001',N'Admin')
 insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q002',N'Nhân viên bán hàng')
 insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q003',N'Member')
 --MEMBER
-insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,TGDNLanCuoi,GioiTinh) values ('M0001','member',N'Nguyễn Phú Thuận',N'Thành phố Hồ Chí Minh','0982567431','thuannp293@gmail.com','1994-03-29','264439148','2014/11/1','20:10:01 2014/12/30','Nam')
-insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,TGDNLanCuoi,GioiTinh) values ('M0002','xukavo',N'Dương Cao Chí',N'Thành phố Hồ Chí Minh','0982567431','phongdk@gm.uit.edu.vn','1994/1/1','264439148','2014/11/3','7:10:00 2014/12/30','Nam')
+insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0001','member',N'Nguyễn Phú Thuận',N'Thành phố Hồ Chí Minh','0982567431','thuannp293@gmail.com','1994-03-29','264439148','2014/11/1','Nam')
+insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0002','xukavo',N'Dương Cao Chí',N'Thành phố Hồ Chí Minh','0982567431','phongdk@gm.uit.edu.vn','1994/1/1','264439148','2014/11/3','Nam')
 
 --NHANVIEN
 insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV001','admin',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1983/01/1','264429133','2014/10/2','Nam')
 insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV002','nvbh',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1988/01/1','264429133','2014/10/10','Nam')
-insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV003','nhkh',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1986/01/1','264429133','2014/10/10','Nam')
 
 
 select * from TAIKHOAN
@@ -148,8 +145,8 @@ create procedure InsertMember
 )
 as
 begin
-	insert into MEMBER (Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,TGDNLanCuoi,GioiTinh) 
-	values (@ma_mem,@username,@hoten,@diachi,@sdt,@email,@ngaysinh,@CMND,@ngaydk,null,@gioitinh)
+	insert into MEMBER (Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) 
+	values (@ma_mem,@username,@hoten,@diachi,@sdt,@email,@ngaysinh,@CMND,@ngaydk,@gioitinh)
 end
 
 ----------InsertStaff----------
@@ -190,7 +187,7 @@ end
 go
 
 
-----------UpdateAccount----------
+----------UpdateMember----------
 drop proc UpdateMember
 create procedure UpdateMember
 (
@@ -207,15 +204,42 @@ as
 begin
 	update MEMBER set 
 						HoTen_Mem = @hoten,
-						CMND = @cmnd,
-						SDT_Mem = @sdt,
 						Email_Mem = @email,
 						GioiTinh = @gioitinh,
 						NgaySinh_Mem = @ngaysinh,
-						DiaChi_Mem = @diachi
+						DiaChi_Mem = @diachi,
+						CMND = @cmnd,
+						SDT_Mem = @sdt											
 						where Username = @username
 end
 
+----------UpdateStaff----------
+drop proc UpdateStaff
+create procedure UpdateStaff
+(
+	@username varchar(20),
+	@hoten nvarchar(50),
+	@email varchar(50),
+	@gioitinh nvarchar(5),
+	@ngaysinh date,
+	@diachi nvarchar(150),
+	@cmnd varchar(20),
+	@sdt varchar(20),
+	@ngayvaolam date
+)
+as
+begin
+	update NHANVIEN set 
+						HoTenNV = @hoten,
+						Email_NV = @email,
+						GioiTinh = @gioitinh,
+						NgaySinh_NV = @ngaysinh,
+						DiaChi_NV = @diachi,
+						CMND_NV = @cmnd,
+						SDT_NV = @sdt,
+						NgayVaoLam = @ngayvaolam											
+						where Username = @username
+end
 
 ----------CheckAccount----------
 drop proc CheckAccount
@@ -227,6 +251,19 @@ begin
 	from TAIKHOAN
 	where Username = @ausername
 end
+
+----------LastLogin----------
+drop proc LastLogin
+create procedure LastLogin
+	@username varchar(20),
+	@TGDNLanCuoi datetime
+as
+begin
+	update TAIKHOAN
+	set TGDNLanCuoi = @TGDNLanCuoi
+	where Username = @username
+end
+
 
 ----------UpdateKhoa----------
 drop proc UpdateKhoa
@@ -264,7 +301,7 @@ drop proc LoadMemberAccount
 create procedure LoadMemberAccount
 as
 begin
-	select Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,FORMAT(NgaySinh_Mem,'dd-MM-yyyy') as NgaySinh,CMND, FORMAT(NgayDKi,'dd-MM-yyyy') as NgayDK,FORMAT(TGDNLanCuoi,'dd-MM-yyyy HH:mm:ss') as DangNhapLanCuoi,GioiTinh
+	select Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,FORMAT(NgaySinh_Mem,'dd-MM-yyyy') as NgaySinh,CMND, FORMAT(NgayDKi,'dd-MM-yyyy') as NgayDK,GioiTinh
 	from MEMBER
 end
 
@@ -274,15 +311,23 @@ create procedure LoadMemberByUsername
   @username varchar(20)
 as
 begin
-	select * from MEMBER
+	select * from MEMBER where Username = @username
 end
 
+----------LoadStaffByUsername----------
+drop proc LoadStaffByUsername
+create procedure LoadStaffByUsername
+  @username varchar(20)
+as
+begin
+	select * from NHANVIEN where Username = @username
+end
 ----------LoadStaffAccount----------
 drop proc LoadStaffAccount
 create procedure LoadStaffAccount
 as
 begin
-	select MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,FORMAT(NgaySinh_NV,'dd-MM-yyyy') as NgaySinh,CMND_NV, FORMAT(NgayVaoLam,'dd-MM-yyyy') as NgayVL,GioiTinh from NHANVIEN
+	select MaNV,	,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,FORMAT(NgaySinh_NV,'dd-MM-yyyy') as NgaySinh,CMND_NV, FORMAT(NgayVaoLam,'dd-MM-yyyy') as NgayVL,GioiTinh from NHANVIEN
 end
 
 ----------DeleteAccount----------
@@ -300,4 +345,21 @@ create procedure DeleteStaff
 as 
 begin 
 	delete  from NHANVIEN where Username = @username
+end
+
+
+create table Voucher
+(
+	MaVoucher varchar(10),
+	imgfile text
+)
+
+create procedure InsertVoucher
+(
+	@mavoucher varchar(10),
+	@imgfile text
+)
+as
+begin
+	insert into Voucher (MaVoucher,imgfile) values (@mavoucher,@imgfile)
 end

@@ -6,12 +6,13 @@
 
 package voucherShop;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author PhuThuan
  */
-import java.sql.ResultSet;
-import java.util.Date;
 public class Account {
     Connect cls;
 
@@ -155,6 +156,23 @@ public class Account {
         value[0] = username;
         cls.executeQuery("DeleteAccount", value, nparameter);
         cls.Disconnect();
-    }    
+    }  
+    public void LastLogin(String username,String lasttime){
+        cls = new Connect();
+        int nparameter = 2;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "username";
+        name[1] = "TGDNLanCuoi";   
+        value[0] = username;
+        value[1] = lasttime;
+        cls.executeQuery("LastLogin", value, nparameter);
+        cls.Disconnect();        
+    }
+//    public static void main(String arg[]){
+//        Connect cls = new Connect();
+//        Account e = new Account();
+//        e.LastLogin("thuanko");
+//    }    
 }
 

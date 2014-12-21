@@ -3,6 +3,8 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import voucherShop.Member;
+import voucherShop.Account;
 
 public final class newjsp_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,24 +46,40 @@ public final class newjsp_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
-      out.write("    <head>\n");
-      out.write("        ");
-      org.apache.jasper.runtime.JspRuntimeLibrary.include(request, response, "head.jsp", out, false);
-      out.write("\n");
+      out.write("    <head>        \n");
       out.write("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\n");
       out.write("        <title>JSP Page</title>\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("<form action=\"Controller\" role=\"form\">\n");
-      out.write("\n");
-      out.write("  <div class=\"form-group\">\n");
-      out.write("    <label for=\"exampleInputFile\">File input</label>\n");
-      out.write("    <input type=\"file\" id=\"exampleInputFile\">\n");
-      out.write("    <p class=\"help-block\">Example block-level help text here.</p>\n");
-      out.write("  </div>\n");
-      out.write("  <input type=\"submit\" id=\"submit\" value=\"img\" class=\"btn btn-default\">\n");
+      out.write("        ");
+
+            //String username = (String) session.getAttribute("Username");       
+            Account a = new Account();
+            Member m = new Member();
+            Object[][] result = a.LoadAccountByUsername("xukavo");
+            Object[][] result1 = m.LoadMemberByUsername("xukavo");
+        
+      out.write("        \n");
+      out.write("<form action=\"Controller\" role=\"form\" method=\"post\">\n");
+      out.write("    <div class=\"form-group\">\n");
+      out.write("                        <label for=\"Image\" class=\"control-label col-xs-2\">Image</label>\n");
+      out.write("                        <div class=\"col-xs-6 checkbox-inline\">\n");
+      out.write("                            <input type=\"text\" name=\"mavoucher\" value=\"\"><br>\n");
+      out.write("                            <img src='' class=\"img-thumbnail\">\n");
+      out.write("                        </div>\n");
+      out.write("                    </div> \n");
+      out.write("                    <div class=\"form-group\">\n");
+      out.write("                        <label for=\"Image\" class=\"control-label col-xs-2\">Image</label>\n");
+      out.write("                        <div class=\"col-xs-6 checkbox-inline\">\n");
+      out.write("                            <input type=\"image\" name=\"imgfile\" value=\"\"><br>\n");
+      out.write("                            <img src='' class=\"img-thumbnail\">\n");
+      out.write("                        </div>\n");
+      out.write("                    </div>    \n");
+      out.write("  <input type=\"submit\" name=\"btnAction\" id=\"submit\" value=\"img\" class=\"btn btn-default\">\n");
       out.write("</form>\n");
       out.write("    </body>\n");
       out.write("</html>\n");

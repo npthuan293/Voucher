@@ -56,7 +56,7 @@
         %>        
         <jsp:include page='navbar.jsp' />
             <div class="container">
-                <form action="Controller" method="post">
+                <form action="Controller">
                     <div class="row">
                         <div class="col-md-12 ">	
                             <h3>Danh sách nhân viên</h3>
@@ -83,13 +83,12 @@
                                     Staff s = new Staff();
                                     Account a = new Account();
                                     Object[][] result = s.LoadStaffAccount();
-
                                     for (int i = 0; i < result.length; i++) {
-                                        Object[][] result2 = a.LoadAccountByUsername((String)result[i][1]);
-                                %>
+                                        Object[][] result2 = a.LoadAccountByUsername((String)result[i][1]); 
+                               %>
                                         <tr>
                                             <td><input type='checkbox' name='Select' id='Select' class="checkbox1" value=<%=result[i][1]%> ></td>
-                                            <td><a href='Edituser.jsp?Username=<%=result[i][1]%>' ><%=result[i][1]%></a></td>
+                                            <td><a href='info_staff.jsp?Username=<%=result[i][1]%>' ><%=result[i][1]%></a></td>
                                             <td><%=result[i][2]%></td>
                                             <td><%=result[i][6]%></td>
                                             <td><%=result[i][5]%></td>

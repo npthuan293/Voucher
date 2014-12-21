@@ -50,28 +50,28 @@ public class Member {
     }
     public void UpdateMember(String hoten,String username, String email, String gioitinh, String ngaysinh, String diachi, String CMND, String sdt) {
         cls = new Connect();
-        int nparameter = 9;
+        int nparameter = 8;
         String[] name = new String[nparameter];
         Object[] value = new Object[nparameter];
         name[0] = "username";
-        name[1] = "sdt";
-        name[2] = "hoten";
-        name[3] = "email";
-        name[4] = "gioitinh";
-        name[5] = "ngaysinh";
-        name[6] = "diachi";
-        name[7] = "cmnd";
+        name[1] = "hoten";
+        name[2] = "email";
+        name[3] = "gioitinh";
+        name[4] = "ngaysinh";
+        name[5] = "diachi";
+        name[6] = "cmnd";
+        name[7] = "sdt";
         value[0] = username;
-        value[1] = sdt;
-        value[2] = hoten;
-        value[3] = email;
-        value[4] = gioitinh;
-        value[5] = ngaysinh;
-        value[6] = diachi;
-        value[7] = CMND;
+        value[1] = hoten;
+        value[2] = email;
+        value[3] = gioitinh;
+        value[4] = ngaysinh;
+        value[5] = diachi;
+        value[6] = CMND;
+        value[7] = sdt;
         cls.executeQuery("UpdateMember", value, nparameter);
         cls.Disconnect();
-    }    
+    }   
     public Object[][] LoadMemberAccount() {
         cls = new Connect();
         Object[][] result = cls.loadData("LoadMemberAccount");
@@ -92,7 +92,6 @@ public class Member {
 //    public static void main(String arg[]) throws ParseException{
 //        Connect cls = new Connect();
 //        Member e = new Member();
-//        e.InsertMember("huyvu1", "Vu Huy", "HCM", "096969696969", "huyvd@gmail.com", "1994/03/29", "1234567", "2014/12/12", "Nu");
-//        
+//        e.UpdateMember("PhuThuan", "member", "thuannp@gmail.com", "nam", "1994/03/01", "New York", "264439148", "0982567431");
 //    }
 }

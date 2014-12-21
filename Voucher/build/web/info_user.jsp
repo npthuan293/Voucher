@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Trang thông tin cá nhân</title>
         <jsp:include page="head.jsp" />
         <style> 
@@ -20,19 +21,22 @@
             }
         </style>
         <script type="text/javascript">
-			$(document).ready(function () {
-				$('#date').datepicker();
-			});
+            $(document).ready(function () {
+                    $('#date').datepicker();
+            });
+            $(document).ready(function () {
+                    $('#date2').datepicker();
+            });
         </script>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
         <%
-            String username = (String) session.getAttribute("Username");       
+            String username =(String) session.getAttribute("Username"); 
             Account a = new Account();
             Member m = new Member();
-            Object[][] result = a.LoadAccountByUsername(username);
-            Object[][] result1 = m.LoadMemberByUsername(username);
+            Object[][] account = a.LoadAccountByUsername(username);            
+            Object[][] listmember = m.LoadMemberByUsername(username);
         %>
         <div class="container">
 
@@ -49,42 +53,42 @@
                         <div class="form-group">
                             <label for="InputUsername">Tên đăng nhập</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="InputUsername" id="InputUsername" placeholder="Enter Username" required  value="<%=result[0][0]%>">
+                                <input type="text" class="form-control" readonly name="InputUsername" id="InputUsername" placeholder="Enter Username" required  value="<%=username%>">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="InputPass">Mật khẩu</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" name="InputPass" id="InputPass" placeholder="Enter Password" required value="<%=result[0][1]%>">
+                                <input type="password" class="form-control" name="InputPass" id="InputPass" placeholder="Enter Password" required value="<%=account[0][1]%>">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="InputName">Họ tên</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Enter Your Name" required value="<%=result1[0][2]%>">
+                                <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Enter Your Name" required value="<%=listmember[0][2]%>">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>  
                         <div class="form-group">
                             <label for="InputCMND">CMND</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="InputCMND" id="InputCMND" placeholder="Số CMND" required value="<%=result1[0][7]%>">
+                                <input type="text" class="form-control" name="InputCMND" id="InputCMND" placeholder="Số CMND" required value="<%=listmember[0][7]%>">
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="InputSDT">Số điện thoại</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="InputSDT" id="InputSDT" placeholder="Số điện thoại" required value="<%=result1[0][4]%>"> 
+                                <input type="text" class="form-control" name="InputSDT" id="InputSDT" placeholder="Số điện thoại" required value="<%=listmember[0][4]%>"> 
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>                         
                         <div class="form-group">
                             <label for="InputEmail">Email</label>
                             <div class="input-group">
-                                <input type="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="Enter Email" required value="<%=result1[0][5]%>" >
+                                <input type="email" class="form-control" id="InputEmailFirst" name="InputEmail" placeholder="Enter Email" required value="<%=listmember[0][5]%>" >
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
@@ -93,7 +97,7 @@
                             <div class="input-group">
                                 <select id="elm_42" class="form-control" name="InputSex" style="border-radius: 4px;" required>
                                     <%
-                                        String sex =(String) result1[0][10];
+                                        String sex =(String) listmember[0][9];
                                         if (sex.equals("Nam"))                                    
                                         {
                                     %>        
@@ -113,20 +117,20 @@
                         <div class="form-group" style="width: 35%;" >
                             <label for="InputDate">Ngày sinh</label>
                             <div class='input-group date' >
-                                <input type="text" id="date" name="date" class="form-control" data-date-format="yyyy/mm/dd" required value="<%=result1[0][6]%>"/>
+                                <input type="text" id="date" name="date" class="form-control" data-date-format="yyyy/mm/dd" required value="<%=listmember[0][6]%>"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar">                                        
                                     </span>                                        
                                 </span>
                             </div>
-                        </div>                  
+                        </div>
                         <div class="form-group">
                             <label for="InputAddress">Địa chỉ</label>
                             <div class="input-group">
-                                <textarea name="InputAddress" id="InputAddress" class="form-control" rows="5" required><%=result1[0][3]%></textarea>
+                                <textarea name="InputAddress" id="InputAddress" class="form-control" rows="5" required><%=listmember[0][3]%></textarea>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
-                            </div>
-                        </div>
+                            </div>                                
+                        </div>                       
                         <input type="submit" name="btnAction" id="submit" value="Cập nhật" class="btn btn-info pull-right">
                     </div>
                 </form>
@@ -134,33 +138,29 @@
                     <div class='col-md-12'>
                 <%
                     String success = request.getParameter("success");
-                    if (success !=null){
+                    if (success != null){
                         if (success.equals("true"))
                         {
                 %>
-                        <div class='alert alert-success'>
-                            <strong><span class='glyphicon glyphicon-ok'></span>Đăng ký thành công !!!</strong>      
-                        </div>                  
-                    </div>
-                 </div>
+                            <div class='alert alert-success'>
+                                <strong><span class='glyphicon glyphicon-ok'></span>Cập nhật thành công !!!</strong>      
+                            </div>                  
+
                 <%
                         }else{
                 %>             
                         <div class='alert alert-danger'>       
-                            <strong><span class='glyphicon glyphicon-remove'></span><strong>Lỗi.Kiểm tra lại thông tin đăng ký.</strong>    
-                        </div>  
+                            <strong><span class='glyphicon glyphicon-remove'></span><strong>Lỗi.Kiểm tra lại thông tin.</strong>    
+                        </div>
                     </div>
-                     </div>
-                        <%
+                </div>                        
+            </div>
+        </div>
+                <%
                         }
                     }
                 %>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Registration form - END -->
-
         </div>
     </body>
 </html>

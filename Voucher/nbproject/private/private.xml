@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/java/voucherShop/Event.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>102</line>
+                <key/>
+            </bookmark>
+        </file>
         <file>
             <url>src/java/voucherShop/Connect.java</url>
             <bookmark id="1">
@@ -13,13 +21,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/E:/Slide/Voucher/Voucher/web/Member.jsp</file>
-            <file>file:/E:/Slide/Voucher/Voucher/src/java/voucherShop/Event.java</file>
-            <file>file:/E:/Slide/Voucher/Voucher/src/java/voucherShop/Account.java</file>
-            <file>file:/E:/Slide/Voucher/Voucher/web/navbar.jsp</file>
+            <file>file:/E:/Slide/Voucher/Voucher/src/java/voucherShop/checkReg.java</file>
             <file>file:/E:/Slide/Voucher/Voucher/web/register.jsp</file>
+            <file>file:/E:/Slide/Voucher/Voucher/web/login.jsp</file>
             <file>file:/E:/Slide/Voucher/Voucher/src/java/voucherShop/Controller.java</file>
-            <file>file:/E:/Slide/Voucher/Voucher/src/java/voucherShop/Member.java</file>
-            <file>file:/E:/Slide/Voucher/Voucher/src/java/voucherShop/Staff.java</file>
         </group>
     </open-files>
 </project-private>
