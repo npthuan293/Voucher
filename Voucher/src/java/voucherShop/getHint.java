@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author PhuThuan
  */
-public class checkReg extends HttpServlet {
+public class getHint extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,33 +30,33 @@ public class checkReg extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            Account a = new Account();
-            Object[][] result = a.LoadAccount();
-            String username = request.getParameter("user");
-            for (int i = 0; i < result.length; i++){
-                if (username.equals((String)result[0][i]))
-                {
-                    out.println("Đã có người sử dụng");
-                }else{
-                    out.println("Có thể sử dụng");
-                }
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out=response.getWriter();
+            try { 
+                    Account a = new Account();
+                    Object[][] result = a.LoadAccount();
+                    String username = request.getParameter("user");
+                    String hint = "";
+                    if(username.equals("")==false){
+                        username=username.toLowerCase();
+                        int len=username.length();
+                        for(int i = 0;i<= result.length;i++){
+                            String name = (String)result[i][0];
+                            CharSequence cs = name.substring(0,len).toLowerCase();
+                            if(username.contains(cs)==true){
+                                if(hint.equals("")==true){
+                                    hint=name;
+                                }else{hint+=","+name;}
+                            }
+                        }
+                    }                            
+                    if(hint.equals("")==true){
+                        out.println("Khongtimth.y");
+                    }
+                        else{out.println("A");
+                    }           
+            }finally{out.close();
             }
-        } finally {out.close();};
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet checkReg</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet checkReg at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -98,4 +98,4 @@ public class checkReg extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}
+}   

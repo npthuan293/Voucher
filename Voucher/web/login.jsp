@@ -9,7 +9,12 @@
 <html>
     <head>
         <jsp:include page="head.jsp" />  
-        <title>Login Page</title>        
+        <title>Login Page</title>
+        <style>
+            body {
+                background-color: #eee;
+            }            
+        </style>
     </head>
     <body>
 
@@ -17,7 +22,7 @@
                     <div class="h1" style="border: none;">
                         <h1 class="text-center">Đăng nhập</h1>
                     </div>                   
-                        <form class="form col-md-12 center-block " action="Controller" method="post" style="width: 50%;float: none;">
+                        <form class="form col-md-12 center-block " action="Controller" method="post" style="width: 25%;float: none;">
                         <div class="form-group">
                             <input type="text" class="form-control input-lg" placeholder="Username" name="username">
                             
@@ -52,12 +57,12 @@
                         
 
                       </form>
-                    <div class="col-md-12" style="width: 50%;padding-left: 371px;">
+                    <div class="col-md-12" style="width: 50%;padding-left: 525px;">
                             <a href="index.jsp">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Trở về</button>
                             </a> 
                         </div>
-                                       <div class="col-md-12" style="float: left;width: 50%;padding-left: 231px;">
+                                       <div class="col-md-12" style="float: left;width: 50%;padding-left: 78px;">
                             <a href="register.jsp">
                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Đăng ký</button>
                             </a>

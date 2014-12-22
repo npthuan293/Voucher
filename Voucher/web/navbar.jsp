@@ -93,8 +93,8 @@
                                  }
                                     else{
                             %>
-                                    <li><a href='info_user.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
-                                    <li><a href='Payment.jsp'>Đơn hàng</a></li>
+                                    <li><a href='info_user.jsp'>Thông tin cá nhân</a></li>
+                                    <li><a href='ListOrder.jsp'>Đơn hàng</a></li>
                                     <li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>
                                 </ul>
                             </li>

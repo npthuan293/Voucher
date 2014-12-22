@@ -11,32 +11,51 @@
 <html>
     <head>        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script>
+            function checkUsername(str){
+                if (str.length == 0) {document.getElementById("txtCheck").innerHTML="";
+                    return;
+                }else{
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function(){
+                        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                            document.getElementById("txtHint").innerHTML = xmlhttp.responseText;;
+                        }
+                    }   
+                    xmlhttp.open("GET","http://localhost:8084/Voucher/getHint?user=" + str,true);
+                    xmlhttp.send();
+                }
+            }             
+        </script>
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-            //String username = (String) session.getAttribute("Username");       
-            Account a = new Account();
-            Member m = new Member();
-            Object[][] result = a.LoadAccountByUsername("xukavo");
-            Object[][] result1 = m.LoadMemberByUsername("xukavo");
-        %>        
-<form action="Controller" role="form" method="post">
-    <div class="form-group">
-                        <label for="Image" class="control-label col-xs-2">mavoucher</label>
-                        <div class="col-xs-6 checkbox-inline">
-                            <input type="text" name="mavoucher" value=""><br>
-                            <img src='' class="img-thumbnail">
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label for="Image" class="control-label col-xs-2">Image</label>
-                        <div class="col-xs-6 checkbox-inline">
-                            <input type="file" name="imgfile" value=""><br>
-                            <img src='' class="img-thumbnail">
-                        </div>
-                    </div>    
-  <input type="submit" name="btnAction" id="submit" value="img" class="btn btn-default">
-</form>
+        <body>
+            <p><b>Tim kiếm cơ bản:</b></p>
+            <form action="http://localhost:8084/Voucher/getHint" method="get">
+                Nhập tên cần tìm: <input type="text" name ="fname" onkeyup="checkUsername(this.value)">
+                <input type="submit" value="checkReg">
+            </form>
+            <p>Gợi ý tên cần tìm: <span id="txtHint"></span></p> </body>
+<!-- begin htmlcommentbox.com -->
+ <div id="HCB_comment_box">
+     <a href="http://www.htmlcommentbox.com">HTML Comment Box</a> is loading comments...
+ </div>
+ <link rel="stylesheet" type="text/css" href="//www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+ <script type="text/javascript" id="hcb"> 
+    if(!window.hcb_user){
+        hcb_user={};
+    } 
+    (function(){
+        var s=document.createElement("script"), l=(""+window.location).replace(/'/g,"%27") || hcb_user.PAGE, h="//www.htmlcommentbox.com";
+        s.setAttribute("type","text/javascript");
+        s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&opts=16862&num=10");
+        if (typeof s!="undefined")
+            document.getElementsByTagName("head")[0].appendChild(s);
+    })
+    (); /*-->*/ </script>
+<!-- end htmlcommentbox.com -->        
+        
+        
     </body>
 </html>

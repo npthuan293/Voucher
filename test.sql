@@ -56,6 +56,7 @@ insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values 
 insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('member','123456','On','Q003','20:10:01 2014/12/30')
 insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('nvbh','123456','On','Q002','20:10:01 2014/12/30')
 insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('xukavo','123456','On','Q003','20:10:01 2014/12/30')
+insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('huyvu','123456','On','Q003','20:10:01 2014/12/30')
 
 --CHUCVU
 insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q001',N'Admin')
@@ -64,6 +65,9 @@ insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q003',N'Member')
 --MEMBER
 insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0001','member',N'Nguyễn Phú Thuận',N'Thành phố Hồ Chí Minh','0982567431','thuannp293@gmail.com','1994-03-29','264439148','2014/11/1','Nam')
 insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0002','xukavo',N'Dương Cao Chí',N'Thành phố Hồ Chí Minh','0982567431','phongdk@gm.uit.edu.vn','1994/1/1','264439148','2014/11/3','Nam')
+insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0004','huyvu',N'Vũ Đức Huy',N'Thành phố Hồ Chí Minh
+DA NAG
+HÂ NOI','0982567431','phongdk@gm.uit.edu.vn','1994/1/1','264439148','2014/11/3','Nam')
 
 --NHANVIEN
 insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV001','admin',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1983/01/1','264429133','2014/10/2','Nam')
@@ -74,7 +78,7 @@ select * from TAIKHOAN
 select * from MEMBER
 select * from NHANVIEN
 delete from TAIKHOAN
-delete from MEMBER where Username = 'huyvu'
+delete from MEMBER where Ma_Mem = 'M0004'
 delete from NHANVIEN
 
 
@@ -327,7 +331,9 @@ drop proc LoadStaffAccount
 create procedure LoadStaffAccount
 as
 begin
-	select MaNV,	,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,FORMAT(NgaySinh_NV,'dd-MM-yyyy') as NgaySinh,CMND_NV, FORMAT(NgayVaoLam,'dd-MM-yyyy') as NgayVL,GioiTinh from NHANVIEN
+	select N.MaNV,N.Username,N.HoTenNV,N.DiaChi_NV,N.SDT_NV,N.Email_NV,FORMAT(NgaySinh_NV,'dd-MM-yyyy') as NgaySinh,N.CMND_NV, FORMAT(NgayVaoLam,'dd-MM-yyyy') as NgayVL,N.GioiTinh,T.MaQuyen
+	from NHANVIEN N,TAIKHOAN T
+	where N.Username = T.Username and T.MaQuyen='Q002'
 end
 
 ----------DeleteAccount----------
@@ -353,6 +359,7 @@ create table Voucher
 	MaVoucher varchar(10),
 	imgfile text
 )
+select * from Voucher
 
 create procedure InsertVoucher
 (
@@ -362,4 +369,67 @@ create procedure InsertVoucher
 as
 begin
 	insert into Voucher (MaVoucher,imgfile) values (@mavoucher,@imgfile)
+end
+
+select * from ORDERS
+create table ORDERS (
+   MADH                 varchar(100)         not null,
+   USERNAME             varchar(100)         null,
+   NGAYTAODH            date				 not null,
+   HINHTHUCTT           nvarchar(100)        not null,
+   TINHTRANGTT          nvarchar(100)        not null,
+   TRANGTHAIDH          nvarchar(100)        not null,
+   HOTENNGUOIMUA        nvarchar(100)        not null,
+   SDT                  varchar(100)         not null,
+   DIACHIGIAOHANG       nvarchar(200)        not null,
+   SOTKNH               varchar(200)         not null,
+   TENCHUTK             nvarchar(100)        not null,
+   NOTE                 nvarchar(500)        null,
+   NGAYTHANHTOAN        date             not null,
+   constraint PK_DONHANG primary key nonclustered (MADH)
+)
+insert into ORDERS(MADH,USERNAME,NGAYTAODH,HINHTHUCTT,TINHTRANGTT,TRANGTHAIDH,HOTENNGUOIMUA,SDT,DIACHIGIAOHANG,SOTKNH,TENCHUTK,NOTE,NGAYTHANHTOAN)
+values('DH0001','member','2014/12/10',N'Trực tiếp',N'Đã thanh toán',N'Đã duyệt',N'Nguyễn Phú Thuận','0982567431',N'KTX Khu A','1234567890',N'Nguyễn Phú Thuận','','2014/12/21')
+drop table CHITIETDH
+create table CHITIETDH (
+   MAVOUCHER            varchar(100)         not null,
+   MADH                 varchar(100)         not null,
+   SOLUONGVOUCHER       varchar(100)     null,
+   constraint PK_CHITIETDH primary key nonclustered (MAVOUCHER, MADH)
+)
+select * from ORDERS
+delete from CHITIETDH
+insert into CHITIETDH(MAVOUCHER,MADH,SOLUONGVOUCHER) values('V0001','DH0001',1)
+insert into CHITIETDH(MAVOUCHER,MADH,SOLUONGVOUCHER) values('V0003','DH0001',3)
+insert into CHITIETDH(MAVOUCHER,MADH,SOLUONGVOUCHER) values('V0004','DH0001',5)
+
+
+
+
+create procedure LoadOrderByMaDH
+(
+	@madh varchar(10)
+)
+as
+begin
+	select * from ORDERS where MADH = @madh
+end
+drop proc LoadOrderByUsername
+create procedure LoadOrderByUsername
+(
+	@username varchar(10)
+)																			
+as
+begin
+	select MADH,USERNAME,FORMAT(NGAYTAODH,'dd-MM-yyyy') as NgayTao,HINHTHUCTT,TINHTRANGTT,TRANGTHAIDH,HOTENNGUOIMUA,SDT,DIACHIGIAOHANG,SOTKNH,TENCHUTK,NOTE,FORMAT(NGAYTHANHTOAN,'dd-MM-yyyy') as NgayThanhToan
+	from ORDERS where USERNAME = @username
+end
+
+create procedure LoadCTDHByMaDH
+(
+	@madh varchar(10)
+)
+as
+begin
+	select * from CHITIETDH where MADH = @madh
 end

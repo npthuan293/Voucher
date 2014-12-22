@@ -26,5 +26,21 @@ public class Voucher {
         value[1] = imgfile;
         cls.excuteDataReader("InsertVoucher", value, nparameter);
         cls.Disconnect();
+    }
+    public void InsertDIENKIEN(String detail){
+        cls =  new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];     
+        name[0] = "detail";
+        value[0] = detail;
+        cls.excuteDataReader("InsertDIEUKIEN", value, nparameter);
+        cls.Disconnect();
+    }  
+    public Object[][] LoadDetail() {
+        cls = new Connect();
+        Object[][] result = cls.loadData("LoadDetail");
+        cls.Disconnect();
+        return result;
     }    
 }

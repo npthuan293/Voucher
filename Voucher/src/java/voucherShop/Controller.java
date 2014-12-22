@@ -173,7 +173,10 @@ public class Controller extends HttpServlet {
                 case "DeleteStaff": {
                     Account a = new Account();
                     Staff s = new Staff();
-                    String[] username = request.getParameterValues("Select");
+                    String[] username = new String[]{};
+                    if (request.getParameterValues("Select") != null){
+                        username = request.getParameterValues("Select");
+                    }                    
                     if (username.length > 0){
                         for (int i = 0;i < username.length;i++)
                         {
@@ -213,24 +216,23 @@ public class Controller extends HttpServlet {
                     String hint = "";
                     if(username.equals("")==false){
                         username=username.toLowerCase();
-                    }
-                    if(hint.equals("")==true){
-                        hint=(String)result[0][1];
-                    }
-                    else{hint+=","+(String)result[0][1];}                    
-                    if (hint.equals("") == true){
-                        out.println("a");
-                    }else{
-                        out.println("b");
-                    }
-                    for (int i = 0; i < result.length; i++){
-                        if (username.equals((String)result[0][i]))
-                        {
-                            out.println("Đã có người sử dụng");
-                        }else{
-                            out.println("Có thể sử dụng");
+                        int len=username.length();
+                        for(int i = 0;i<= result.length;i++){
+                            String name = (String)result[i][0];
+                            CharSequence cs = name.substring(0,len).toLowerCase();
+                            if(username.contains(cs)==true){
+                                if(hint.equals("")==true){
+                                    hint=name;
+                                }else{hint+=","+name;}
+                            }
                         }
-                    }                
+                    }                            
+                    if(hint.equals("")==true){
+                        out.println("Khongtimth.y");
+                    }
+                        else{out.println("A");
+                    }                  
+                    break;
                 }
             }
         }

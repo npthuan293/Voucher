@@ -9,6 +9,14 @@
         <servlet-class>voucherShop.checkReg</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ControllerOrder</servlet-name>
+        <servlet-class>voucherShop.ControllerOrder</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getHint</servlet-name>
+        <servlet-class>voucherShop.getHint</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ControllerVoucher</servlet-name>
         <servlet-class>voucherShop.ControllerVoucher</servlet-class>
     </servlet>
@@ -20,6 +28,21 @@
         <servlet-name>checkReg</servlet-name>
         <url-pattern>/checkReg</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControllerOrder</servlet-name>
+        <url-pattern>/ControllerOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getHint</servlet-name>
+        <url-pattern>/getHint</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
+            E:\Slide\Voucher\Voucher\web\Resources\
+         </param-value>
+    </context-param>
     <servlet-mapping>
         <servlet-name>ControllerVoucher</servlet-name>
         <url-pattern>/ControllerVoucher</url-pattern>
