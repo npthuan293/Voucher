@@ -22,7 +22,7 @@ public class Connect {
     String urlConn  = "jdbc:sqlserver://localhost:1433;databaseName=";
     String dbName   = "test";
     String userName = "sa";
-    String passWord = "123";
+    String passWord = "1234";
     public Connect() {
         try {
             Class.forName(driver).newInstance();

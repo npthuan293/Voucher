@@ -129,7 +129,19 @@ public class Event {
         } catch (Exception ex) {
         }
         return false;
-    }    
+    } 
+    public boolean insertVoucher(String madm, String tenvoucher, String thongtin, String soluong, String giaban, String thoihanvoucher, String soluongdaban, String hinhanh, String dieukien, String diemnoibat) {
+        try {
+            Voucher a = new Voucher();
+                //pass = md5String(pass);
+                a.InsertVoucher( madm, tenvoucher, thongtin, soluong,giaban, thoihanvoucher,soluongdaban, hinhanh, dieukien, diemnoibat);
+                return true;
+            
+        } catch (Exception ex) {
+
+        }
+        return false;
+    }
 //    public boolean updateKhoa(String username) {
 //        try {
 //            Account a = new Account();
@@ -175,6 +187,7 @@ public class Event {
         }
         return ChucVu;
     }
+    }
 //    public static void main(String arg[]){
 //        Connect cls = new Connect();
 //        Event e = new Event();
@@ -182,4 +195,3 @@ public class Event {
 //        
 //        System.out.print(e.insertMember("M001", "admin","123456", "Nguyen", "HCM", "0909", "oc@gmail.com", "1994/03/29", "2644", "2014/12/2", "Nam"));
 //    }    
-}

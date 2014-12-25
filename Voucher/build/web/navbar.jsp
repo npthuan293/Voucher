@@ -18,40 +18,30 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.jsp">Voucher</a>
+                    <a class="navbar-brand" href="#">SkyLand</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="index.jsp">Trang chủ</a></li>
-                        <li><a href="#about">Giới thiệu</a></li>
+                        <li><a href="index.jsp">Trang chủ</a></li>
+                        <li><a target="_bank" href="info.jsp">Giới thiệu</a></li>
                         <li><a href="#contact">Liên hệ</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Voucher<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="voucher_pages.jsp">Du Lịch</a></li>
+                                <li><a href="#">Thời Trang</a></li>
+                                <li><a href="#">Ẩm Thực</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">Nav header</li>
                                 <li><a href="#">Separated link</a></li>
                                 <li><a href="#">One more separated link</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Thông tin khuyến mãi<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
-                            </ul>
-                        </li>
-                          
+                         <li>
+                            <a href="Promotions.jsp">Thông Tin Khuyến Mãi</a>
+                        </li>                        
                     </ul>
-                                            <div class="col-sm-3 col-md-3">
+                        <div class="col-sm-3 col-md-3">
                             <form class="navbar-form" role="search">
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Search" name="q">
@@ -83,7 +73,7 @@
                                     }else if (result.equals("Nhân viên bán hàng")){
                             %>
                                     <li><a href='info_staff.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
-                                    <li><a href=''>Quản lý Voucher</a></li>
+                                    <li><a href='voucher_Manag.jsp'>Quản lý Voucher</a></li>
                                     <li><a href=''>Quản lý Thông tin khuyến mãi</a></li>
                                     <li><a href=''>Quản lý đơn hàng</a></li>
                                     <li><a href=''>Quản lý quà tặng</a></li>

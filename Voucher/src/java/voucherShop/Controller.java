@@ -170,6 +170,10 @@ public class Controller extends HttpServlet {
                     response.sendRedirect("register.jsp");   
                     break;
                 }
+                case "AddVoucher":{
+                    response.sendRedirect("AddVoucher.jsp");   
+                    break;
+                }
                 case "DeleteStaff": {
                     Account a = new Account();
                     Staff s = new Staff();
@@ -185,6 +189,21 @@ public class Controller extends HttpServlet {
                         }
                     }
                     response.sendRedirect("Staff.jsp");
+                    break;
+                }
+                case "DeleteVoucherByMAVOUCHER": {
+                    Voucher a = new Voucher();
+                    String[] MAVOUCHER = new String[]{};
+                    if (request.getParameterValues("Select") != null){
+                        MAVOUCHER = request.getParameterValues("Select");
+                    }                    
+                    if (MAVOUCHER.length > 0){
+                        for (int i = 0;i < MAVOUCHER.length;i++)
+                        {
+                            a.DeleteVoucherByMAVOUCHER(MAVOUCHER[i]);
+                        }
+                    }
+                    response.sendRedirect("voucher_Manag.jsp");
                     break;
                 }
                 case "Tạo tài khoản":{ //thêm mới nhân viên
@@ -208,6 +227,27 @@ public class Controller extends HttpServlet {
                         response.sendRedirect("register.jsp?success=false");
                     }
                     break;
+                }
+                case "Thêm Voucher":{
+                    Connect cls = new Connect();
+                    Event e = new Event();
+                    String madm = request.getParameter("InputMADM");
+                    String tenvoucher = request.getParameter("InputTENVOUCHER");
+                    String thongtin = request.getParameter("InputTHONGTIN");
+                    String giaban = request.getParameter("InputGIABAN");
+                    String soluong = request.getParameter("InputSLCON");
+                    String thoihanvoucher = request.getParameter("InputTHOIHAN");
+                    String soluongdaban = request.getParameter("InputSLBAN");
+                    String dieukien = request.getParameter("InputDK");
+                    String diemnoibat = request.getParameter("InputDNB");
+                    String hinhanh = request.getParameter("InputHA");   
+                    boolean result = e.insertVoucher(madm, tenvoucher, thongtin, soluong,giaban, thoihanvoucher,soluongdaban, hinhanh, dieukien, diemnoibat);
+                    if (result) {
+                        response.sendRedirect("AddVoucher.jsp?success=true");
+                    } else {
+                        response.sendRedirect("AddVoucher.jsp?success=false");
+                    }
+                    break; 
                 }
                 case "checkReg":{
                     Account a = new Account();

@@ -433,3 +433,120 @@ as
 begin
 	select * from CHITIETDH where MADH = @madh
 end
+drop table VOUCHER
+create table VOUCHER (
+   MAVOUCHER            varchar(100)         not null,
+   MADM                 varchar(100)         null,
+   TENVOUCHER           nvarchar(200)        not null,
+   THONGTIN             nvarchar(300)        not null,
+   SOLUONGCON           bigint               not null,
+   GIABAN               float                not null,
+   THOIHANVOUCHER       varchar(100)         not null,
+   SOLUONGDABAN         bigint               not null,
+   HINHANHVOUCHER       varchar(200)         null,
+   DIEUKIEN             nvarchar(800)        not null,
+   DIEMNOIBAT           nvarchar(800)        not null,
+   constraint PK_VOUCHER primary key nonclustered (MAVOUCHER)
+)
+-- Voucher Ăn Uống --
+insert into VOUCHER values ('AU001','AU',N'Canh Chua Cá Lóc',N'Canh chua cá lóc được nấu từ nhà hàng Huy-STP giàu chất dinh dưỡng','10','99000','2014/12/05 - 2015/02/05','45',null,N'Hết ngày 05/12/2014/',N'ngon bổ rẻ')
+insert into VOUCHER values ('DL002','DL',N'Biển Vũng Tàu',N'Chuyến đi du lịch Vũng Tàu sang trọng, bla bla','20','1696696','2014/12/05 - 2015/02/05','35',null,N'Hết ngày 30/12/2014/',N'Nhanh chóng tiện lợi')
+insert into VOUCHER values ('DL003','DL',N'Nghỉ Dưỡng Resort HuySTP',N'Nghỉ dưỡng lại Resort HuySTP rộng lớn nhất Đông Nam Á, bla bla','40','969069','2014/12/05 - 2015/02/05','40',null,N'Hết ngày 08/1/2015',N'Vui vẻ thoáng mát')
+insert into VOUCHER values ('AU004','AU',N'Canh Chua Cá Lóc',N'Canh chua cá lóc được nấu từ nhà hàng Huy-STP giàu chất dinh dưỡng','10','99000','2014/12/05 - 2015/02/05','45',null,N'Hết ngày 05/12/2014/',N'ngon bổ rẻ')
+insert into VOUCHER values ('DL005','DL',N'Biển Vũng Tàu',N'Chuyến đi du lịch Vũng Tàu sang trọng, bla bla','20','1696696','2014/12/05 - 2015/02/05','35',null,N'Hết ngày 30/12/2014/',N'Nhanh chóng tiện lợi')
+insert into VOUCHER values ('DL006','DL',N'Nghỉ Dưỡng Resort HuySTP',N'Nghỉ dưỡng lại Resort HuySTP rộng lớn nhất Đông Nam Á, bla bla','40','969069','2014/12/05 - 2015/02/05','40',null,N'Hết ngày 08/1/2015',N'Vui vẻ thoáng mát')
+select * from VOUCHER
+----- 
+create procedure LoadDetailVoucher
+as
+begin
+	select * from VOUCHER
+end
+------ LoadVoucherByDM ------
+create procedure LoadVoucherByDM
+  @MADM varchar(100)
+as
+begin
+	select * from VOUCHER where MADM = @MADM
+end
+------ DeleteVoucherByMAVOUCHER -------
+drop proc DeleteVoucherByMAVOUCHER
+create procedure DeleteVoucherByMAVOUCHER
+	@MAVOUCHER varchar(100)
+as 
+begin 
+	delete  from VOUCHER where MAVOUCHER = @MAVOUCHER
+end
+go
+------- GetID_Voucher ----
+drop proc GetID_VoucherByDL
+create proc GetID_VoucherByDL
+
+as
+begin
+	select max(MAVOUCHER) from VOUCHER where MADM = 'DL'
+end
+go
+create proc GetID_VoucherByAU
+as
+begin
+	select max(MAVOUCHER) from VOUCHER where MADM = 'AU'
+end
+go
+
+create proc GetID_VoucherBySP
+as
+begin
+	select max(MAVOUCHER) from VOUCHER where MADM = 'SP'
+end
+go
+create proc GetID_VoucherByGT
+as
+begin
+	select max(MAVOUCHER) from VOUCHER where MADM = 'GT'
+end
+go
+select * from VOUCHER
+----- CheckMAVoucher ----- 
+drop proc CheckVoucher
+create procedure CheckVoucher
+	@tenvoucher nvarchar(200),
+	@thongtin nvarchar(300),
+	@soluong bigint,
+	@giaban float,
+	@thoihanvoucher varchar(100),
+	@soluongdaban bigint,
+	@hinhanh varchar(200),
+	@dieukien nvarchar(800),
+	@diemnoibat nvarchar(800)
+as
+begin
+	select * 
+	from VOUCHER
+	where TENVOUCHER = @tenvoucher and THONGTIN = @thongtin 
+	and SOLUONGCON = @soluong and GIABAN = @giaban and THOIHANVOUCHER = @thoihanvoucher
+	and SOLUONGDABAN = @soluongdaban and HINHANHVOUCHER = @hinhanh and DIEUKIEN = @dieukien
+	and DIEMNOIBAT = @diemnoibat  
+end
+
+----- InsertVoucher ------
+
+create procedure InsertVoucher
+(
+	@mavoucher varchar(100),
+	@madm varchar(100),
+	@tenvoucher nvarchar(200),
+	@thongtin nvarchar(300),
+	@soluong bigint,
+	@giaban float,
+	@thoihanvoucher varchar(100),
+	@soluongdaban bigint,
+	@hinhanh varchar(200),
+	@dieukien nvarchar(800),
+	@diemnoibat nvarchar(800)
+)
+as
+begin
+	insert into VOUCHER (MAVOUCHER,MADM,TENVOUCHER,THONGTIN,SOLUONGCON,GIABAN,THOIHANVOUCHER,SOLUONGDABAN,HINHANHVOUCHER,DIEUKIEN,DIEMNOIBAT) 
+	values (@mavoucher,@madm,@tenvoucher,@thongtin,@soluong,@giaban,@thoihanvoucher,@soluongdaban,@hinhanh,@dieukien,@diemnoibat)
+end
