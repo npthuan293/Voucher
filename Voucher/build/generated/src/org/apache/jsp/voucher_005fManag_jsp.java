@@ -124,7 +124,8 @@ public final class voucher_005fManag_jsp extends org.apache.jasper.runtime.HttpJ
       out.write("                                    <option value=\"Tat ca\">Tất cả</option>\n");
       out.write("                                    <option value=\"Du lich\">Du Lịch</option>\n");
       out.write("                                    <option value=\"Am thuc\">Ẩm Thực</option>\n");
-      out.write("                                    <option value=\"Thoi trang\">Thời Trang</option>\n");
+      out.write("                                    <option value=\"Giai tri\">Giải Trí</option>\n");
+      out.write("                                    <option value=\"Spa\">Spa</option>\n");
       out.write("                                </select> \n");
       out.write("                            </div>\n");
       out.write("                        </div> \n");

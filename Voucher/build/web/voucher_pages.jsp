@@ -18,12 +18,13 @@
     <link rel="stylesheet" type="text/css" href="Styles/styles.css">
     <style> 
             body{
-                padding:80px;
+                padding:60px;
 
             }
     </style>
 </head>
-<body>
+<body style=";background-color: rgb(236, 232, 225);">
+    
     <jsp:include page="navbar.jsp" />
     <div class="container">
 
@@ -38,16 +39,20 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="images/demo/c9cap1.jpg" alt="">
+                                    <img class="slide-image" src="images/voucher/dulich.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="images/demo/teammate3.jpg" alt="">
+                                    <img class="slide-image" src="images/voucher/amthuc.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="images/demo/teammate2.jpg" alt="">
+                                    <img class="slide-image" src="images/voucher/giaitri.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="images/voucher/spa.jpg" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -90,7 +95,7 @@
                                     }
                                     %>
                 </div>
-                 <div class="container" style="margin-top: 600px; margin-bottom: -700px;">
+                 <div class="container" style="margin-bottom: -700px;background-color: rgb(236, 232, 225);">
                 <footer>
                     <div class="row">
                         <div class="col-lg-12"><hr>

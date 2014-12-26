@@ -16,11 +16,11 @@
             }            
         </style>
     </head>
-    <body>
+    <body style="background: url(images/login.jpg)no-repeat;margin:180px -140px 0px 150px">
 
                 
                     <div class="h1" style="border: none;">
-                        <h1 class="text-center">Đăng nhập</h1>
+                        <h1 class="text-center" style="color: white;">Đăng nhập</h1>
                     </div>                   
                         <form class="form col-md-12 center-block " action="Controller" method="post" style="width: 25%;float: none;">
                         <div class="form-group">

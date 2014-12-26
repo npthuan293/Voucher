@@ -7,8 +7,8 @@
 <%@page import="voucherShop.Event"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<div class="navbar-wrapper">
-    <div class="container">
+<div class="navbar-wrapper" style="margin-top: 0px;">
+    <div>
         <div class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
