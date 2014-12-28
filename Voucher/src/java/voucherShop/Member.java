@@ -88,7 +88,18 @@ public class Member {
         Object[][] result = cls.loadData("LoadMemberByUsername", value, nparameter);
         cls.Disconnect();
         return result;
-    }    
+    }  
+    public Object[][] SearchMember(String input) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "input";
+        value[0] = input;
+        Object[][] result = cls.loadData("SearchMember", value, nparameter);
+        cls.Disconnect();
+        return result;
+    }     
 //    public static void main(String arg[]) throws ParseException{
 //        Connect cls = new Connect();
 //        Member e = new Member();

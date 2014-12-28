@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="InputPass">Mật khẩu</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" name="InputPass" id="InputPass" placeholder="Enter Password" required value="<%=account[0][1]%>">
+                                    <input type="password" class="form-control" name="InputPass" id="InputPass" placeholder="Enter Password" required value="<%=account[0][2]%>">
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                                 </div>
                             </div>

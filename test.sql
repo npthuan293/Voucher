@@ -57,7 +57,7 @@ insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values 
 insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('nvbh','123456','On','Q002','20:10:01 2014/12/30')
 insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('xukavo','123456','On','Q003','20:10:01 2014/12/30')
 insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('huyvu','123456','On','Q003','20:10:01 2014/12/30')
-
+insert into TAIKHOAN (Username,Password,TrangThaiTK,MaQuyen,TGDNLanCuoi) values ('nvbh1','123456','On','Q002','20:10:01 2014/12/30')
 --CHUCVU
 insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q001',N'Admin')
 insert into PHANQUYEN(MaQuyen,TenQuyen) values('Q002',N'Nhân viên bán hàng')
@@ -68,10 +68,11 @@ insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySi
 insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0004','huyvu',N'Vũ Đức Huy',N'Thành phố Hồ Chí Minh
 DA NAG
 HÂ NOI','0982567431','phongdk@gm.uit.edu.vn','1994/1/1','264439148','2014/11/3','Nam')
-
+insert into MEMBER(Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,NgaySinh_Mem,CMND,NgayDKi,GioiTinh) values ('M0005','member',N'Nguyễn Phú Thuât',N'Thành phố Hồ Chí Minh','0982567431','thuannp293@gmail.com','1994-03-29','264439148','2014/11/1','Nam')
 --NHANVIEN
 insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV001','admin',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1983/01/1','264429133','2014/10/2','Nam')
-insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV002','nvbh',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1988/01/1','264429133','2014/10/10','Nam')
+insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV002','nvbh',N'Lê Thị Mỹ Thịnh',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1988/01/1','264429133','2014/10/10','Nam')
+insert into NHANVIEN(MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,NgaySinh_NV,CMND_NV,NgayVaoLam,GioiTinh) values ('NV003','nvbh1',N'Dương Khai Phong',N'Thành phố Hồ Chí Minh','0909123456','phongdk@gm.uit.edu.vn','1988/01/1','264429133','2014/10/10','Nam')
 
 
 select * from TAIKHOAN
@@ -298,6 +299,43 @@ create procedure LoadAccount
 as
 begin
 	select * from TAIKHOAN
+end
+
+
+create procedure SearchMember
+	@input nvarchar(20)
+as
+begin
+	select Ma_Mem,Username,HoTen_Mem,DiaChi_Mem,SDT_Mem,Email_Mem,FORMAT(NgaySinh_Mem,'dd-MM-yyyy') as NgaySinh,CMND, FORMAT(NgayDKi,'dd-MM-yyyy') as NgayDK,GioiTinh
+	from MEMBER 
+	where ((Ma_Mem like (@input + '%') or Ma_Mem like ('%' + @input) or Ma_Mem like ('%' + @input + '%')) ) or 
+	((Username like (@input + '%') or Username like ('%' + @input) or Username like ('%' + @input + '%')) ) or 
+	((HoTen_Mem like (@input + '%') or HoTen_Mem like ('%' + @input) or HoTen_Mem like ('%' + @input + '%')) ) or 
+	((DiaChi_Mem like (@input + '%') or DiaChi_Mem like ('%' + @input) or DiaChi_Mem like ('%' + @input + '%')) ) or
+	((SDT_Mem like (@input + '%') or SDT_Mem like ('%' + @input) or SDT_Mem like ('%' + @input + '%')) ) or 
+	((Email_Mem like (@input + '%') or Email_Mem like ('%' + @input) or Email_Mem like ('%' + @input + '%')) ) or 
+	((NgaySinh_Mem like (@input + '%') or NgaySinh_Mem like ('%' + @input) or NgaySinh_Mem like ('%' + @input + '%')) ) or 
+	((CMND like (@input + '%') or CMND like ('%' + @input) or CMND like ('%' + @input + '%')) ) or 
+	((NgayDKi like (@input + '%') or NgayDKi like ('%' + @input) or NgayDKi like ('%' + @input + '%')) ) or 
+	((GioiTinh like (@input + '%') or GioiTinh like ('%' + @input) or GioiTinh like ('%' + @input + '%')) )
+end
+
+
+create procedure SearchStaff
+	@input nvarchar(20)
+as
+begin
+	select MaNV,Username,HoTenNV,DiaChi_NV,SDT_NV,Email_NV,FORMAT(NgaySinh_NV,'dd-MM-yyyy') as NgaySinh,CMND_NV,GioiTinh
+	from NHANVIEN 
+	where ((MaNV like ('Khai Phong' + '%') or MaNV like ('%' + 'Khai Phong') or MaNV like ('%' + 'Khai Phong' + '%')) ) or 
+	((Username like ('Khai Phong' + '%') or Username like ('%' + 'Khai Phong') or Username like ('%' + 'Khai Phong' + '%')) ) or 
+	((HoTenNV like ('Khai Phong' + '%') or HoTenNV like ('%' + 'Khai Phong') or HoTenNV like ('%' + 'Khai Phong' + '%')) ) or 
+	((DiaChi_NV like ('Khai Phong' + '%') or DiaChi_NV like ('%' + 'Khai Phong') or DiaChi_NV like ('%' + 'Khai Phong' + '%')) ) or
+	((SDT_NV like ('Khai Phong' + '%') or SDT_NV like ('%' + 'Khai Phong') or SDT_NV like ('%' + 'Khai Phong' + '%')) ) or 
+	((Email_NV like ('Khai Phong' + '%') or Email_NV like ('%' + 'Khai Phong') or Email_NV like ('%' + 'Khai Phong' + '%')) ) or 
+	((NgaySinh_NV like ('Khai Phong' + '%') or NgaySinh_NV like ('%' + 'Khai Phong') or NgaySinh_NV like ('%' + 'Khai Phong' + '%')) ) or 
+	((CMND_NV like ('Khai Phong' + '%') or CMND_NV like ('%' + 'Khai Phong') or CMND_NV like ('%' + 'Khai Phong' + '%')) ) or 
+	((GioiTinh like ('Khai Phong' + '%') or GioiTinh like ('%' + 'Khai Phong') or GioiTinh like ('%' + 'Khai Phong' + '%')) ) 
 end
 
 ----------LoadMemberAccount----------

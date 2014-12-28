@@ -173,7 +173,7 @@ public class Event {
     public String CheckAdmin(String username) {
         Account a = new Account();
         Object[][] info = a.LoadAccountByUsername(username);
-        String quyen = (String) info[0][3];
+        String quyen = (String) info[0][1];
         String ChucVu;
         if (quyen.equals("Q001"))
         {

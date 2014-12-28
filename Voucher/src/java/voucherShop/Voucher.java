@@ -16,36 +16,6 @@ public class Voucher {
     Connect cls;
     public Voucher(){
     }
-public boolean CheckVoucher(String tenvoucher, String thongtin, String soluong, String giaban, 
-        String thoihanvoucher, String soluongdaban, String hinhanh, String dieukien, String diemnoibat) {
-        cls = new Connect();
-        int nparameter = 9;
-        String[] name = new String[nparameter];
-        Object[] value = new Object[nparameter];
-        name[2] = "tenvoucher";
-        value[2] = tenvoucher;
-        name[3] = "thongtin";
-        value[3] = thongtin;
-        name[4] = "soluong";
-        value[4] = soluong;
-        name[5] = "giaban";
-        value[5] = giaban;
-        name[6] = "thoihanvoucher";
-        value[6] = thoihanvoucher;
-        name[7] = "soluongdaban";
-        value[7] = soluongdaban;
-        name[8] = "hinhanh";
-        value[8] = hinhanh;
-        name[9] = "dieukien";
-        value[9] = dieukien;
-        name[10] = "diemnoibat";
-        value[10] = diemnoibat;
-        Object[][] result = cls.loadData("CheckVoucher", value, nparameter);
-        cls.Disconnect();
-        if (result.length > 0)
-            return true;
-        return false;
-    }
     public void InsertVoucher(String madm, String tenvoucher, String thongtin, String soluong, String giaban, String thoihanvoucher, String soluongdaban, String hinhanh, String dieukien, String diemnoibat)throws ParseException{
         cls =  new Connect();
         int nparameter = 11;
@@ -117,6 +87,28 @@ public boolean CheckVoucher(String tenvoucher, String thongtin, String soluong, 
         cls.Disconnect();
         return result;
     }
+    public Object[][] LoadVOUCHERFromCTHD(String MaDH){
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "madh";
+        value[0] = MaDH;
+        Object[][] result = cls.loadData("LoadVoucherByDM", value, nparameter);
+        cls.Disconnect();
+        return result;
+    }  
+    public Object[][] LoadVOUCHERByMaVC(String mav){
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "mavoucher";
+        value[0] = mav;
+        Object[][] result = cls.loadData("LoadVOUCHERByMaVC", value, nparameter);
+        cls.Disconnect();
+        return result;
+    }    
     public void DeleteVoucherByMAVOUCHER(String MAVOUCHER) {
         cls = new Connect();
         int nparameter = 1;
@@ -127,4 +119,4 @@ public boolean CheckVoucher(String tenvoucher, String thongtin, String soluong, 
         cls.executeQuery("DeleteVoucherByMAVOUCHER", value, nparameter);
         cls.Disconnect();
     }
-    }
+}

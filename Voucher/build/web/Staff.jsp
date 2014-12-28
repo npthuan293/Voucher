@@ -24,6 +24,15 @@
             }
         </style>
         <script>
+            $(document).ready(function () {
+               $('#table').load('searchMember.jsp').show();
+               $('#Input').keyup(function(){
+                  $.post('searchMember.jsp',{input: list.Input.value},
+                  function(result){
+                     $('#table').html(result).show(); 
+                  }); 
+               });
+            });            
             $(document).ready(function() {
                 $('#selectall').click(function(event) {  //on click 
                     if(this.checked) { // check select status
@@ -56,13 +65,22 @@
         %>        
         <jsp:include page='navbar.jsp' />
             <div class="container">
-                <form action="Controller">
+                <form action="Controller" name="list">
                     <div class="row">
-                        <div class="col-md-12 ">	
+                        <div class="col-md-12" style="text-align: center">	
                             <h3>Danh sách nhân viên</h3>
-                       </div>
-                    </div>                    
-                    <div class="table-responsive">
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <h4 style="float:left;">Tìm kiếm: &nbsp;</h4>
+                        <div class="input-group" style="width:20%;">
+                            <input type="text" class="form-control" placeholder="Search" id="Input" name="Input">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit" disabled><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>                        
+                    </div><br>                    
+                    <div class="table-responsive" id="table">
                         <table class="table table-bordered table-hover table-striped tablesorter" id="usertable">
                             <thead>
                                 <tr>

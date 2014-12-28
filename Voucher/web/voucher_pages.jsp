@@ -11,6 +11,7 @@
 <html lang="en">
 <head>
    <title>Thông Tin Voucher</title>
+   <jsp:include page="head.jsp" />
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" type="text/css" href="Styles/voucher_pages.css">
     <!-- Custom CSS -->
@@ -39,7 +40,6 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                                 <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
@@ -72,15 +72,15 @@
                                     for (int i = 0; i < result.length; i++) {
                                 %>
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="http://placehold.it/320x150" alt="">
-                            <div class="caption">
-                                <h4><p><%=result[i][2]%></p></h4><br>
-                                <h4 class="pull-right" style="margin-top: -20px;">Giá bán: <%=result[i][5]%></h4><br>
-                                <p>Thông Tin: <%=result[i][3]%></p>
+                        <a href="DetailVoucher.jsp?id=<%=result[i][0]%>" style="width: 320px;height: 150px;">
+                        <div class="thumbnail" >
+                                <img  src="images/<%=result[i][0]%>.jpg" alt="" style="width: 320px;height: 150px;">
+                            <div class="caption" style="height: 80px;">
+                                <b><%=result[i][2]%></b><br><br>
+                                <h4 class="pull-left" style="color: red; margin-top: -10px;">Giá bán: <%=result[i][5]%> VNĐ</h4><br>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">15 reviews</p>
+                                <p class="pull-right">Chi tiết</p>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
@@ -89,13 +89,13 @@
                                     <span class="glyphicon glyphicon-star"></span>
                                 </p>
                             </div>
+                        </div></a>
                         </div>
-                    </div>
                      <% 
                                     }
                                     %>
                 </div>
-                 <div class="container" style="margin-bottom: -700px;background-color: rgb(236, 232, 225);">
+                 <div class="container" style="margin-top: 600px; margin-bottom: -700px;">
                 <footer>
                     <div class="row">
                         <div class="col-lg-12"><hr>

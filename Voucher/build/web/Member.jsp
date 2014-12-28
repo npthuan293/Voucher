@@ -24,17 +24,26 @@
             }
         </style> 
         <script>
-            $(document).ready(function() {
-                $('#selectall').click(function(event) {  //on click 
-                    if(this.checked) { // check select status
-                        $('.checkbox1').each(function() { //loop through each checkbox
-                            this.checked = true;  //select all checkboxes with class "checkbox1"               
-                        });
-                    }else{
-                        $('.checkbox1').each(function() { //loop through each checkbox
-                            this.checked = false; //deselect all checkboxes with class "checkbox1"                       
-                        });         
-                    }
+            $(document).ready(function () {
+               $('#table').load('searchMember.jsp').show();
+               $('#Input').keyup(function(){
+                  $.post('searchMember.jsp',{input: list.Input.value},
+                  function(result){
+                     $('#table').html(result).show(); 
+                  }); 
+               });
+            });            
+            $(document).ready(function() {              
+            $('#selectall').click(function(event) {  //on click 
+                if(this.checked) { // check select status
+                    $('.checkbox1').each(function() { //loop through each checkbox
+                        this.checked = true;  //select all checkboxes with class "checkbox1"               
+                    });
+                }else{
+                    $('.checkbox1').each(function() { //loop through each checkbox
+                        this.checked = false; //deselect all checkboxes with class "checkbox1"                       
+                    });         
+                }
                 });   
             });          
         </script>        
@@ -55,13 +64,22 @@
         %>        
         <jsp:include page='navbar.jsp' />
             <div class="container">
-                <form action="Controller">
+                <form action="Controller" name="list">
                     <div class="row">
-                        <div class="col-md-12 ">	
+                        <div class="col-md-12" style="text-align: center">	
                             <h3>Danh sách thành viên</h3>
-                       </div>
-                    </div>                     
-                    <div class="table-responsive">
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <h4 style="float:left;">Tìm kiếm: &nbsp; </h4>
+                        <div class="input-group" style="width:20%;">
+                            <input type="text" class="form-control" placeholder="Search" id="Input" name="Input">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit" disabled><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </div>                        
+                    </div><br>
+                    <div class="table-responsive" id="table">
                         <table class="table table-bordered table-hover table-striped tablesorter" id="usertable">
                             <thead>
                                 <tr>
@@ -100,7 +118,7 @@
                                     <td><%=result[i][8]%></td>
                                     <td><%=result2[0][4]%></td>
                                 <%
-                                    if (result2[0][2].equals("On")){
+                                    if (result2[0][3].equals("Đang hoạt động")){
                                 %>
                                     <td>Còn hoạt động</td>
                                 <%

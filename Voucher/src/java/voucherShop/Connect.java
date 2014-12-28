@@ -20,9 +20,9 @@ public class Connect {
     Connection conn;
     String driver   = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     String urlConn  = "jdbc:sqlserver://localhost:1433;databaseName=";
-    String dbName   = "test";
+    String dbName   = "WebVoucher";
     String userName = "sa";
-    String passWord = "1234";
+    String passWord = "123";
     public Connect() {
         try {
             Class.forName(driver).newInstance();

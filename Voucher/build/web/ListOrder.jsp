@@ -4,6 +4,7 @@
     Author     : PhuThuan
 --%>
 
+<%@page import="voucherShop.Voucher"%>
 <%@page import="voucherShop.Orders"%>
 <%@page import="voucherShop.Member"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,7 +32,7 @@
             <form action="Controller">
                 <div class="row">
                     <div class="col-md-12 ">	
-                        <h3>Danh sách thành viên</h3>
+                        <h3>Danh sách đơn hàng đã đặt</h3>
                     </div>
                 </div>                     
                 <div class="table-responsive">
@@ -39,50 +40,35 @@
                         <thead>
                             <tr>
                                 <th>Mã hóa đơn<i class="fa fa-sort"></i></th>                                   
-                                <th>Username<i class="fa fa-sort"></i></th>
                                 <th>Họ tên<i class="fa fa-sort"></i></th>
                                 <th>Ngày mua<i class="fa fa-sort"></i></th>
                                 <th>Tình trạng thanh toán <i class="fa fa-sort"></i></th>
                                 <th>Trạng thái đơn hàng <i class="fa fa-sort"></i></th>
                                 <th>Số điện thoại <i class="fa fa-sort"></i></th>
-                                <th>Địa chỉ <i class="fa fa-sort"></i></th>
-                                <th>Ngày thanh toán<i class="fa fa-sort"></i></th>
-                                <th>Ngày đăng ký <i class="fa fa-sort"></i></th>
-                                <th>Thời gian đăng nhập lần cuối <i class="fa fa-sort"></i></th>
-                                <th>Tình trạng <i class="fa fa-sort"></i></th>
+                                <th>Tổng hóa đơn <i class="fa fa-sort"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             <%
                                 String username = (String) session.getAttribute("Username");
                                 Orders o = new Orders();
+                                Voucher v = new Voucher();
                                 Object[][] result = o.LoadOrderByUsername(username);
-                                for (int i = 0; i < result.length; i++) {                               
+                                for (int i = 0; i < result.length; i++) {
+                                    Object[][] cthd = o.LoadCTDHByMaDH((String)result[i][0]);
+                                    Object[][] voucher = v.LoadVOUCHERFromCTHD((String)cthd[i][1]);
+                                    int soluong = Integer.parseInt((String)cthd[i][2]);
+                                    double dongia = Double.parseDouble((String)voucher[0][5]);
+                                    double total = soluong * dongia;
                             %>
                             <tr>
-                                <td><a style="text-decoration: initial;" href='Payment.jsp?id=<%=result[i][0]%>'><%=result[i][0]%></td>
-                                <td><%=result[i][1]%></td>
+                                <td><a style="text-decoration: initial;" href='Payment.jsp?id=<%=result[i][0]%>'><%=result[i][0]%></a></td>
                                 <td><%=result[i][6]%></td>
                                 <td><%=result[i][2]%></td>
                                 <td><%=result[i][4]%></td>
                                 <td><%=result[i][5]%></td>
                                 <td><%=result[i][7]%></td>
-                                <td><%=result[i][8]%></td>
-                                <td><%=result[i][12]%></td>
-                                <td><%=result[i][8]%></td>
-                                <td><%=result[i][4]%></td>
-                            <%
-                                if (result[i][2].equals("On")){
-                            %>
-                                <td>Còn hoạt động</td>
-                            <%
-                                }else{
-                            %>
-                                <td>Đã khóa</td>
-                            <%
-                                }
-                            %>
-                                </tr>
+                                <td><%=total%></td>
                             <%
                                 }
                             %>

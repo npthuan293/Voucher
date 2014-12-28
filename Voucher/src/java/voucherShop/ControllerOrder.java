@@ -35,8 +35,30 @@ public class ControllerOrder extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             String action = request.getParameter("btnAction");
             switch (action){
-                case "Thêm":{
-                    
+                case "Đặt hàng":{
+                    String voucherName = request.getParameter("voucherName");
+                    String userName = request.getParameter("InputUsername");
+                    String Name = request.getParameter("InputName");
+                    String sdt = request.getParameter("InputSDT");
+                    String hinhthuc = request.getParameter("InputHT");
+                    String taikhoanNH = request.getParameter("InputTKNH");
+                    String sotaikhoan = request.getParameter("InputNumber");
+                    String note = request.getParameter("InputNote");
+                    String diachi = request.getParameter("InputAddress");
+                    String soluong = request.getParameter("count");
+                    String mavoucher = request.getParameter("mavoucher");
+                    out.println(voucherName);
+                    out.println(userName);
+                    out.println(Name);
+                    out.println(sdt);
+                    out.println(hinhthuc);
+                    out.println(taikhoanNH);
+                    out.println(sotaikhoan);
+                    out.println(note);
+                    out.println(diachi);
+                    out.println(soluong);
+                    out.println(mavoucher);  
+                    break;
                 }
             }
         }

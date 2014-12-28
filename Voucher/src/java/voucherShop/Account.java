@@ -129,6 +129,17 @@ public class Account {
 //        cls.executeQuery("UpdateEmail", name, value, nparameter);
 //        cls.Disconnect();
 //    }
+    public Object[][] SearchAccount(String username) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "username";
+        value[0] = username;
+        Object[][] result = cls.loadData("SearchAccount", value, nparameter);
+        cls.Disconnect();
+        return result;
+    }    
     public Object[][] LoadAccountByUsername(String username) {
         cls = new Connect();
         int nparameter = 1;

@@ -4,6 +4,7 @@
     Author     : PhuThuan
 --%>
 
+<%@page import="voucherShop.Voucher"%>
 <%@page import="voucherShop.Orders"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,6 +55,7 @@
                         <%
                             String madh = request.getParameter("id");
                             Orders o = new Orders();
+                            Voucher v = new Voucher();
                             Object[][] result = o.LoadOrderByMaDH(madh);
                         %>                        
                         <div class="row">
@@ -110,7 +112,7 @@
                                     <table class="table table-condensed">
                                         <thead>
                                             <tr>
-                                                <td><strong>Item Name</strong></td>
+                                                <td><strong>Tên voucher</strong></td>
                                                 <td class="text-center"><strong>Đơn giá</strong></td>
                                                 <td class="text-center"><strong>Số lượng</strong></td>
                                                 <td class="text-right"><strong>Tổng</strong></td>
@@ -118,20 +120,24 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                double dongia = 9500;
+                                                double dongia = 0;
                                                 double total=0;
-                                                Object[][] result2 = o.LoadCTDHByMaDH((String)result[0][0]);
-                                                for (int i = 0; i < result2.length; i++) {
+                                                Object[][] ctdh = o.LoadCTDHByMaDH((String)result[0][0]);
+                                                for (int i = 0; i < ctdh.length; i++) {
+                                                    Object[][] voucher = v.LoadVOUCHERFromCTHD((String)ctdh[i][1]);
+                                                    for (i = 0; i < voucher.length; i++){
+                                                        dongia = Double.parseDouble((String)voucher[i][5]);
+                                                    }
                                             %>
                                             <tr>
-                                                <td><%=result2[i][0]%></td>
+                                                <td><%=voucher[i][0]%></td>
                                                 <td class="text-center"><%=dongia%> VNĐ</td>
-                                                <td class="text-center"><%=result2[i][2]%></td>
+                                                <td class="text-center"><%=ctdh[i][2]%></td>
                                                 <%
-                                                    int soluong = Integer.parseInt((String)result2[i][2]);
+                                                    int soluong = Integer.parseInt((String)ctdh[i][2]);
                                                 %>
                                                 <td class="text-right"><%=dongia*soluong%> VNĐ</td>
-                                                <%total += dongia*soluong;%>
+                                                <%total = dongia*soluong;%>
                                             </tr>
                                             <%
                                                 }

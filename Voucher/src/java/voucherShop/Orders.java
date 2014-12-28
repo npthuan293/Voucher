@@ -46,5 +46,42 @@ public class Orders {
         Object[][] result = cls.loadData("LoadCTDHByMaDH", value, nparameter);
         cls.Disconnect();
         return result;
-    }    
+    }
+    public Object[][] LoadOrder() {
+        cls = new Connect();
+        Object[][] result = cls.loadData("LoadOrder");
+        cls.Disconnect();
+        return result;
+    }
+    public Object[][] SearchOrder(String input) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "input";
+        value[0] = input;
+        Object[][] result = cls.loadData("SearchOrder", value, nparameter);
+        cls.Disconnect();
+        return result;
+    }
+    public void DeleteOrder(String madh) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "madh";
+        value[0] = madh;
+        cls.executeQuery("DeleteOrder", value, nparameter);
+        cls.Disconnect();
+    } 
+    public void ChangeStatus(String madh) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "madh";
+        value[0] = madh;
+        cls.executeQuery("DeleteOrder", value, nparameter);
+        cls.Disconnect();
+    }     
 }

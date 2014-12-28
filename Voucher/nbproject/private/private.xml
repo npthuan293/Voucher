@@ -13,15 +13,17 @@
             <url>src/java/voucherShop/Connect.java</url>
             <bookmark id="1">
                 <name/>
-                <line>23</line>
+                <line>0</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Huy/Desktop/Voucher_Full/Voucher/web/login.jsp</file>
-            <file>file:/C:/Users/Huy/Desktop/Voucher_Full/Voucher/web/index.jsp</file>
+            <file>file:/E:/Slide/Voucher/Voucher/web/comment.jsp</file>
+            <file>file:/E:/Slide/Voucher/Voucher/web/DetailVoucher.jsp</file>
+            <file>file:/E:/Slide/Voucher/Voucher/web/register.jsp</file>
+            <file>file:/E:/Slide/Voucher/Voucher/web/thanhtoan.jsp</file>
         </group>
     </open-files>
 </project-private>

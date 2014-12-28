@@ -67,7 +67,6 @@
                                     <li><a href='info_staff.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
                                     <li><a href='Member.jsp'>Quản lý thành viên</a></li>
                                     <li><a href='Staff.jsp'>Quản lý nhân viên</a></li>
-                                    <li><a href='NCC.jsp'>Quản lý nhà cung cấp</a></li>
                                     <li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>
                             <%
                                     }else if (result.equals("Nhân viên bán hàng")){
@@ -75,7 +74,7 @@
                                     <li><a href='info_staff.jsp?Username=<%=username%>'>Thông tin cá nhân</a></li>
                                     <li><a href='voucher_Manag.jsp'>Quản lý Voucher</a></li>
                                     <li><a href=''>Quản lý Thông tin khuyến mãi</a></li>
-                                    <li><a href=''>Quản lý đơn hàng</a></li>
+                                    <li><a href='Order.jsp'>Quản lý đơn hàng</a></li>
                                     <li><a href=''>Quản lý quà tặng</a></li>
                                     <li><a href=''>Thống kê</a></li>
                                     <li><a href='Controller?btnAction=Logout'>Đăng xuất</a></li>                                   

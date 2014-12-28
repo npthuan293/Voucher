@@ -19,25 +19,20 @@
         </style>
         <script type="text/javascript">
             $(document).ready(function () {
+               $('#txtCheck').load('checkUsername.jsp').show();
+               $('#InputUsername').keyup(function(){
+                  $.post('checkUsername.jsp',{username: login.InputUsername.value},
+                  function(result){
+                     $('#txtCheck').html(result).show(); 
+                  }); 
+               });
+            });
+            $(document).ready(function () {
                     $('#date').datepicker();
             });
             $(document).ready(function () {
                     $('#date2').datepicker();
             });
-            function checkUsername(str){
-                if (str.length == 0) {document.getElementById("txtCheck").innerHTML="";
-                    return;
-                }else{
-                    var xmlhttp = new XMLHttpRequest();
-                    xmlhttp.onreadystatechange = function(){
-                        if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-                            document.getElementById("txtCheck").innerHTML = xmlhttp.responseText;
-                        }
-                    }   
-                    xmlhttp.open("GET","http://localhost:8084/Voucher/Controller?btnAction=checkReg&user=" + str,true);
-                    xmlhttp.send();
-                }
-            } 
         </script>
     </head>
     <body>         
@@ -68,13 +63,13 @@
         <!-- Registration form - START -->
         <div class="container">
             <div class="row">
-                <form action="Controller" role="form" >
+                <form action="Controller" role="form" name="login" >
                     <div class="col-lg-6">
                         <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Thông tin bắt buộc</strong></div>
                         <div class="form-group">
                             <label for="InputUsername">Tên đăng nhập</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" name="InputUsername" id="InputUsername" placeholder="Tên đăng nhập" onkeyup="checkUsername(this.value)" required>
+                                <input type="text" class="form-control" name="InputUsername" id="InputUsername" placeholder="Tên đăng nhập" onkeyup="check(this.value)" required>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                                 <h4><span id="txtCheck"></h4>
                             </div>

@@ -95,5 +95,18 @@ public class Staff {
         Object[][] result = cls.loadData("LoadStaffByUsername", value, nparameter);
         cls.Disconnect();
         return result;
+    } 
+    public Object[][] SearchStaff(String username,String input) {
+        cls = new Connect();
+        int nparameter = 1;
+        String[] name = new String[nparameter];
+        Object[] value = new Object[nparameter];
+        name[0] = "username";
+        name[1] = "input";
+        value[0]=  username;
+        value[1] = input;
+        Object[][] result = cls.loadData("SearchStaff", value, nparameter);
+        cls.Disconnect();
+        return result;
     }     
 }
